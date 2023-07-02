@@ -7,22 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F20C2B32A50399C009026D6 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B22A50399C009026D6 /* Login.swift */; };
+		0F20C2B52A5039A5009026D6 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B42A5039A5009026D6 /* Register.swift */; };
+		0F20C2B72A5039F0009026D6 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B62A5039F0009026D6 /* EntryView.swift */; };
+		0F20C2B92A50944F009026D6 /* GenderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B82A50944F009026D6 /* GenderProgress.swift */; };
+		0F20C2BB2A50D76D009026D6 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2BA2A50D76D009026D6 /* Home.swift */; };
 		0F49BF692A4F1062005EF07F /* GenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF682A4F1062005EF07F /* GenderApp.swift */; };
 		0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF6A2A4F1062005EF07F /* ContentView.swift */; };
 		0F49BF6D2A4F1063005EF07F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F49BF6C2A4F1063005EF07F /* Assets.xcassets */; };
 		0F49BF702A4F1063005EF07F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F49BF6F2A4F1063005EF07F /* Preview Assets.xcassets */; };
+		0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF772A4F1098005EF07F /* HomeView.swift */; };
+		0F49BF7E2A4F10FB005EF07F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF7D2A4F10FB005EF07F /* User.swift */; };
+		0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF802A4F1521005EF07F /* HomeViewModel.swift */; };
+		0F49BF942A4F179A005EF07F /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */; };
+		0F49BFA42A4F1F64005EF07F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0F49BFA32A4F1F64005EF07F /* FirebaseAuth */; };
+		0F49BFA62A4F1F64005EF07F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F49BFA52A4F1F64005EF07F /* FirebaseFirestore */; };
+		0F49BFA82A4F1F64005EF07F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F49BFA72A4F1F64005EF07F /* FirebaseStorage */; };
+		0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFA92A4F2402005EF07F /* UserData.swift */; };
+		0F49BFAC2A4F434E005EF07F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F49BFAB2A4F434E005EF07F /* GoogleService-Info.plist */; };
+		0F49BFAE2A4F568B005EF07F /* UserConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFAD2A4F568B005EF07F /* UserConnection.swift */; };
+		0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48602A5174DA00CB87A5 /* Profile.swift */; };
+		0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48622A51752700CB87A5 /* RouterView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0F49BF8A2A4F1741005EF07F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F49BF5D2A4F1062005EF07F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F49BF642A4F1062005EF07F;
+			remoteInfo = Gender;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0F20C2B22A50399C009026D6 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0F20C2B42A5039A5009026D6 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		0F20C2B62A5039F0009026D6 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		0F20C2B82A50944F009026D6 /* GenderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderProgress.swift; sourceTree = "<group>"; };
+		0F20C2BA2A50D76D009026D6 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		0F49BF652A4F1062005EF07F /* Gender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F49BF682A4F1062005EF07F /* GenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderApp.swift; sourceTree = "<group>"; };
 		0F49BF6A2A4F1062005EF07F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0F49BF6C2A4F1063005EF07F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F49BF6F2A4F1063005EF07F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0F49BF772A4F1098005EF07F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0F49BF7D2A4F10FB005EF07F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0F49BF802A4F1521005EF07F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0F49BF862A4F1741005EF07F /* GenderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		0F49BFA92A4F2402005EF07F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0F49BFAB2A4F434E005EF07F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F49BFAD2A4F568B005EF07F /* UserConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConnection.swift; sourceTree = "<group>"; };
+		0FBB48602A5174DA00CB87A5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0FBB48622A51752700CB87A5 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0F49BF622A4F1062005EF07F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F49BFA42A4F1F64005EF07F /* FirebaseAuth in Frameworks */,
+				0F49BFA62A4F1F64005EF07F /* FirebaseFirestore in Frameworks */,
+				0F49BFA82A4F1F64005EF07F /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F49BF832A4F1741005EF07F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,10 +84,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F20C2B12A50391C009026D6 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0F20C2B22A50399C009026D6 /* Login.swift */,
+				0F20C2B42A5039A5009026D6 /* Register.swift */,
+				0F20C2B82A50944F009026D6 /* GenderProgress.swift */,
+				0F20C2BA2A50D76D009026D6 /* Home.swift */,
+				0FBB48602A5174DA00CB87A5 /* Profile.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		0F49BF5C2A4F1062005EF07F = {
 			isa = PBXGroup;
 			children = (
 				0F49BF672A4F1062005EF07F /* Gender */,
+				0F49BF872A4F1741005EF07F /* GenderTests */,
 				0F49BF662A4F1062005EF07F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				0F49BF652A4F1062005EF07F /* Gender.app */,
+				0F49BF862A4F1741005EF07F /* GenderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,9 +117,14 @@
 		0F49BF672A4F1062005EF07F /* Gender */ = {
 			isa = PBXGroup;
 			children = (
+				0F49BF7F2A4F1477005EF07F /* Services */,
+				0F49BF7B2A4F10C6005EF07F /* ViewModel */,
+				0F49BF7C2A4F10CD005EF07F /* Model */,
+				0F49BF762A4F108B005EF07F /* View */,
 				0F49BF682A4F1062005EF07F /* GenderApp.swift */,
 				0F49BF6A2A4F1062005EF07F /* ContentView.swift */,
 				0F49BF6C2A4F1063005EF07F /* Assets.xcassets */,
+				0F49BFAB2A4F434E005EF07F /* GoogleService-Info.plist */,
 				0F49BF6E2A4F1063005EF07F /* Preview Content */,
 			);
 			path = Gender;
@@ -65,6 +136,58 @@
 				0F49BF6F2A4F1063005EF07F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0F49BF762A4F108B005EF07F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F20C2B12A50391C009026D6 /* Helper */,
+				0F49BF772A4F1098005EF07F /* HomeView.swift */,
+				0F20C2B62A5039F0009026D6 /* EntryView.swift */,
+				0FBB48622A51752700CB87A5 /* RouterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F49BF7B2A4F10C6005EF07F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F49BF802A4F1521005EF07F /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F49BF7C2A4F10CD005EF07F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F49BF7D2A4F10FB005EF07F /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F49BF7F2A4F1477005EF07F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0F49BFA92A4F2402005EF07F /* UserData.swift */,
+				0F49BFAD2A4F568B005EF07F /* UserConnection.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0F49BF872A4F1741005EF07F /* GenderTests */ = {
+			isa = PBXGroup;
+			children = (
+				0F49BF8F2A4F1753005EF07F /* ViewModel */,
+			);
+			path = GenderTests;
+			sourceTree = "<group>";
+		};
+		0F49BF8F2A4F1753005EF07F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,9 +206,32 @@
 			dependencies = (
 			);
 			name = Gender;
+			packageProductDependencies = (
+				0F49BFA32A4F1F64005EF07F /* FirebaseAuth */,
+				0F49BFA52A4F1F64005EF07F /* FirebaseFirestore */,
+				0F49BFA72A4F1F64005EF07F /* FirebaseStorage */,
+			);
 			productName = Gender;
 			productReference = 0F49BF652A4F1062005EF07F /* Gender.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0F49BF852A4F1741005EF07F /* GenderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F49BF8C2A4F1741005EF07F /* Build configuration list for PBXNativeTarget "GenderTests" */;
+			buildPhases = (
+				0F49BF822A4F1741005EF07F /* Sources */,
+				0F49BF832A4F1741005EF07F /* Frameworks */,
+				0F49BF842A4F1741005EF07F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F49BF8B2A4F1741005EF07F /* PBXTargetDependency */,
+			);
+			name = GenderTests;
+			productName = GenderTests;
+			productReference = 0F49BF862A4F1741005EF07F /* GenderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -100,6 +246,11 @@
 					0F49BF642A4F1062005EF07F = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
+					0F49BF852A4F1741005EF07F = {
+						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
+						TestTargetID = 0F49BF642A4F1062005EF07F;
+					};
 				};
 			};
 			buildConfigurationList = 0F49BF602A4F1062005EF07F /* Build configuration list for PBXProject "Gender" */;
@@ -111,11 +262,15 @@
 				Base,
 			);
 			mainGroup = 0F49BF5C2A4F1062005EF07F;
+			packageReferences = (
+				0F49BFA22A4F1F64005EF07F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 0F49BF662A4F1062005EF07F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				0F49BF642A4F1062005EF07F /* Gender */,
+				0F49BF852A4F1741005EF07F /* GenderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -127,6 +282,14 @@
 			files = (
 				0F49BF702A4F1063005EF07F /* Preview Assets.xcassets in Resources */,
 				0F49BF6D2A4F1063005EF07F /* Assets.xcassets in Resources */,
+				0F49BFAC2A4F434E005EF07F /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F49BF842A4F1741005EF07F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,12 +300,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */,
+				0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */,
 				0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */,
+				0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */,
+				0F20C2B52A5039A5009026D6 /* Register.swift in Sources */,
+				0F20C2B92A50944F009026D6 /* GenderProgress.swift in Sources */,
+				0F20C2BB2A50D76D009026D6 /* Home.swift in Sources */,
+				0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */,
+				0F49BF7E2A4F10FB005EF07F /* User.swift in Sources */,
+				0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */,
+				0F20C2B32A50399C009026D6 /* Login.swift in Sources */,
+				0F49BFAE2A4F568B005EF07F /* UserConnection.swift in Sources */,
 				0F49BF692A4F1062005EF07F /* GenderApp.swift in Sources */,
+				0F20C2B72A5039F0009026D6 /* EntryView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F49BF822A4F1741005EF07F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F49BF942A4F179A005EF07F /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F49BF8B2A4F1741005EF07F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F49BF642A4F1062005EF07F /* Gender */;
+			targetProxy = 0F49BF8A2A4F1741005EF07F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0F49BF712A4F1063005EF07F /* Debug */ = {
@@ -317,6 +508,47 @@
 			};
 			name = Release;
 		};
+		0F49BF8D2A4F1741005EF07F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H6YXW4WBS6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = devibrahimglr.GenderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "GenderTests/ViewModel/GenderTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+			};
+			name = Debug;
+		};
+		0F49BF8E2A4F1741005EF07F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H6YXW4WBS6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = devibrahimglr.GenderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "GenderTests/ViewModel/GenderTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -338,7 +570,45 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		0F49BF8C2A4F1741005EF07F /* Build configuration list for PBXNativeTarget "GenderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F49BF8D2A4F1741005EF07F /* Debug */,
+				0F49BF8E2A4F1741005EF07F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F49BFA22A4F1F64005EF07F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F49BFA32A4F1F64005EF07F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F49BFA22A4F1F64005EF07F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0F49BFA52A4F1F64005EF07F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F49BFA22A4F1F64005EF07F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		0F49BFA72A4F1F64005EF07F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F49BFA22A4F1F64005EF07F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0F49BF5D2A4F1062005EF07F /* Project object */;
 }

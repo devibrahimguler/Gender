@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct GenderProgress: View {
+    
+    @EnvironmentObject var homeViewModel : HomeViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack{
+            
+            Text("Gender")
+                .foregroundColor(.black)
+                .font(.system(size: 40,weight: .bold, design: .rounded))
+                .frame( width: getRect().width, alignment: .center)
+                .rotationEffect(Angle(degrees: homeViewModel.rotation))
+                .animation(.easeOut.repeatForever(), value: homeViewModel.rotation)
+            
+        }.onAppear {
+            homeViewModel.rotation = homeViewModel.rotation == 30 ? homeViewModel.rotation - 60 : homeViewModel.rotation + 60
+        }
     }
 }
 
 struct GenderProgress_Previews: PreviewProvider {
     static var previews: some View {
-        GenderProgress()
+        ContentView()
     }
 }
