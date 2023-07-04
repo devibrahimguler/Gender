@@ -32,6 +32,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

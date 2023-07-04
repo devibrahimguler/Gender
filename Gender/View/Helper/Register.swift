@@ -11,6 +11,10 @@ struct Register: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
+    private let black : Color = Color("Black")
+    private let cardBG : Color = Color("CardBG")
+    private let bG : Color = Color("BG")
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -19,7 +23,7 @@ struct Register: View {
                 Spacer(minLength: 10)
                 
                 Text("Gender")
-                    .foregroundColor(.black)
+                    .foregroundColor(black)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
                     .offset(y: homeViewModel.isFocused ? -300 : 0)
@@ -34,11 +38,11 @@ struct Register: View {
                     HStack {
                         
                         Image(systemName: "envelope")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         TextField("Your Email".uppercased(), text: $homeViewModel.email)
@@ -56,11 +60,11 @@ struct Register: View {
                     
                     HStack {
                         Image(systemName: "lock.fill")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         SecureField("Password".uppercased(), text: $homeViewModel.password)
@@ -77,11 +81,11 @@ struct Register: View {
                     
                     HStack {
                         Image(systemName: "person.crop.circle.fill")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         SecureField("Name".uppercased(), text: $homeViewModel.name)
@@ -98,11 +102,11 @@ struct Register: View {
                     
                     HStack {
                         Image(systemName: "tag")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         SecureField("Surname".uppercased(), text: $homeViewModel.surname)
@@ -119,11 +123,11 @@ struct Register: View {
                     
                     HStack {
                         Image(systemName: "calendar")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         SecureField("Age".uppercased(), text: $homeViewModel.age)
@@ -138,35 +142,33 @@ struct Register: View {
                 }
                 .frame(height: 312)
                 .frame(maxWidth: 712)
-                .background(.cyan)
+                .background(cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
                 
-                HStack {
-                    Button(action: {
-                        homeViewModel.isLogin = true
-                    }) {
-                        Text("Click for Log in !")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    .padding(2)
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        homeViewModel.registerUser()
-                    }) {
-                        Text("Register")
-                            .foregroundColor(.black)
-                    }
-                    .padding(12)
-                    .padding(.horizontal, 20)
-                    .background(.gray)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 20)
+                Button(action: {
+                    homeViewModel.registerUser()
+                }) {
+                    Text("Register")
+                        .foregroundColor(black)
                 }
+                .frame(maxWidth: .infinity)
+                .padding(12)
+                .padding(.horizontal, 20)
+                .background(cardBG)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .padding()
+                
+                Button(action: {
+                    homeViewModel.isLogin = true
+                }) {
+                    Text("Click for Log in !")
+                        .font(.subheadline)
+                        .foregroundColor(black)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 30)
                 
 
@@ -177,7 +179,7 @@ struct Register: View {
         }
         .offset(y: homeViewModel.isFocused ? -300 : 0)
         .animation(.easeInOut, value: homeViewModel.isFocused)
-        .background(.thinMaterial)
+        .background(bG)
         .onTapGesture {
             homeViewModel.isFocused = false
             
@@ -188,6 +190,7 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Register()
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

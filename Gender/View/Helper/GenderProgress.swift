@@ -11,12 +11,14 @@ struct GenderProgress: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
+    private let black : Color = Color("Black")
+    
     var body: some View {
         
         VStack{
             
             Text("Gender")
-                .foregroundColor(.black)
+                .foregroundColor(black)
                 .font(.system(size: 40,weight: .bold, design: .rounded))
                 .frame( width: getRect().width, alignment: .center)
                 .rotationEffect(Angle(degrees: homeViewModel.rotation))
@@ -30,6 +32,7 @@ struct GenderProgress: View {
 
 struct GenderProgress_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        GenderProgress()
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

@@ -28,7 +28,8 @@ struct EntryView: View {
 
 struct EntryView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        EntryView()
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }
 

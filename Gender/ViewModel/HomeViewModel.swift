@@ -16,6 +16,9 @@ class HomeViewModel : ObservableObject{
     @Published var isFocused = false
     @Published var isProgress = false
     @Published var isProfile = false
+    @Published var isSettings = false
+    @Published var isStartSearched = false
+
     
     @Published var rotation = 30.0
     

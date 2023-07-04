@@ -11,6 +11,10 @@ struct Login: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
+    private let black : Color = Color("Black")
+    private let cardBG : Color = Color("CardBG")
+    private let bG : Color = Color("BG")
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -19,7 +23,7 @@ struct Login: View {
                 Spacer(minLength: 10)
                 
                 Text("Gender")
-                    .foregroundColor(.black)
+                    .foregroundColor(black)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
                     .offset(y: homeViewModel.isFocused ? -300 : 0)
@@ -34,7 +38,7 @@ struct Login: View {
                     HStack {
                         
                         Image(systemName: "envelope")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -56,7 +60,7 @@ struct Login: View {
                     
                     HStack {
                         Image(systemName: "lock.fill")
-                            .foregroundColor(.black)
+                            .foregroundColor(black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -75,50 +79,48 @@ struct Login: View {
                 }
                 .frame(height: 136)
                 .frame(maxWidth: 712)
-                .background(.cyan)
+                .background(cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
+                
+                Button(action: {
+                    homeViewModel.loginUser()
+                }) {
+                    Text("Log in")
+                        .foregroundColor(black)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(12)
+                .padding(.horizontal, 20)
+                .background(cardBG)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .padding()
+           
                 
                 HStack {
                     
-                    VStack(alignment: .leading, spacing: 5) {
-                        
-                        Button(action: {
-        
-                        }) {
-                            Text("Forgot password ?")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        .padding(2)
-                        
-                        Button(action: {
-                            homeViewModel.isLogin = false
-                        }) {
-                            Text("Click for Register !")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        .padding(2)
-                        
-                        
+                    Button(action: {
+    
+                    }) {
+                        Text("Forgot password ?")
+                            .font(.subheadline)
+                            .foregroundColor(black)
                     }
+                    .padding(2)
+
                     
                     Spacer()
                     
                     Button(action: {
-                        homeViewModel.loginUser()
+                        homeViewModel.isLogin = false
                     }) {
-                        Text("Log in")
-                            .foregroundColor(.black)
+                        Text("Click for Register !")
+                            .font(.subheadline)
+                            .foregroundColor(black)
                     }
-                    .padding(12)
-                    .padding(.horizontal, 20)
-                    .background(.gray)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 20)
-                    
+                    .padding(2)
                 }
                 .padding(.horizontal, 30)
 
@@ -130,7 +132,7 @@ struct Login: View {
         .offset(x:homeViewModel.isLogin ? 0 : getRect().width * 2, y: homeViewModel.isFocused ? -300 : 0)
         .animation(.easeInOut, value: homeViewModel.isFocused)
         .animation(.easeInOut, value: homeViewModel.isLogin)
-        .background(.thinMaterial)
+        .background(bG)
         .onTapGesture {
             homeViewModel.isFocused = false
             
@@ -141,6 +143,7 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Login()
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }
