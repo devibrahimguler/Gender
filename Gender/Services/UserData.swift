@@ -8,18 +8,18 @@
 import Firebase
 
 protocol FirestoreProtocol {    
-    func fetchData(completion : @escaping (Result<[User]?, FirestoreError>) -> ())
-    func addUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ())
-    func updateUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ())
-    func deleteUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ())
+    func fetchData(completion : @escaping (Result<[GenderUser]?, FirestoreError>) -> ())
+    func addUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ())
+    func updateUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ())
+    func deleteUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ())
 }
 
 struct UserData : FirestoreProtocol {
     
     let firestore = Firestore.firestore()
     
-    func fetchData(completion : @escaping (Result<[User]?, FirestoreError>) -> ()) {
-        var data : [User] = [User]()
+    func fetchData(completion : @escaping (Result<[GenderUser]?, FirestoreError>) -> ()) {
+        var data : [GenderUser] = [GenderUser]()
         firestore.collection("Users").addSnapshotListener { result, error in
             if let error = error { print(error.localizedDescription) }
             guard let documents = result?.documents else {
@@ -27,7 +27,7 @@ struct UserData : FirestoreProtocol {
                 return
             }
             data = documents.compactMap({ query in
-                var user : User = User(username: "", photos: [], name: "", surname: "", age: "", description: "", hobies: [], likes: [], dislike: [], superlike: [])
+                var user : GenderUser = GenderUser(username: "", name: "", surname: "", age: "",livecity:"", description: "",gender: "",interest: "",photos: [], hobies: [], likes: [], dislike: [], superlike: [])
                 
                 for i in query.data() {
                     if let list = i.value as? [String] {
@@ -67,9 +67,9 @@ struct UserData : FirestoreProtocol {
         }
     }
     
-    func addUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
+    func addUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
         
-        let data = getData(user: user)
+        let data = getData(genderUser: genderUser)
         
         firestore.collection("Users").addDocument(data: data) { error in
             if let error = error { print(error.localizedDescription) }
@@ -77,36 +77,39 @@ struct UserData : FirestoreProtocol {
         }
     }
     
-    func updateUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
+    func updateUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
         
-        let data = getData(user: user)
+        let data = getData(genderUser: genderUser)
         
-        firestore.collection("Users").document(user.id).setData(data) { error in
+        firestore.collection("Users").document(genderUser.id).setData(data) { error in
             if let error = error { print(error.localizedDescription) }
             completion(.success(true))
         }
     }
     
-    func deleteUser(user: User, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
-        firestore.collection("Users").document(user.id).delete() { error in
+    func deleteUser(genderUser: GenderUser, completion : @escaping (Result<Bool, FirestoreError>) -> ()) {
+        firestore.collection("Users").document(genderUser.id).delete() { error in
             if let error = error { print(error.localizedDescription) }
             completion(.success(true))
         }
     }
     
-    private func getData(user: User) -> [String: Any] {
+    private func getData(genderUser: GenderUser) -> [String: Any] {
         var data : [String: Any] = [:]
-        user.id != "" ? data["id"] = user.id : nil
-        user.username != "" ? data["username"] = user.username : nil
-        user.photos != [] ? data["photos"] = user.photos : nil
-        user.name != "" ? data["name"] = user.name : nil
-        user.surname != "" ? data["surname"] = user.surname : nil
-        user.age != "" ? data["age"] = user.age : nil
-        user.description != "" ? data["description"] = user.description : nil
-        user.hobies != [] ? data["hobies"] = user.hobies : nil
-        user.likes != [] ? data["likes"] = user.likes : nil
-        user.dislike != [] ? data["dislike"] = user.dislike : nil
-        user.superlike != [] ? data["superlike"] = user.superlike : nil
+        genderUser.id != "" ? data["id"] = genderUser.id : nil
+        genderUser.username != "" ? data["username"] = genderUser.username : nil
+        genderUser.name != "" ? data["name"] = genderUser.name : nil
+        genderUser.surname != "" ? data["surname"] = genderUser.surname : nil
+        genderUser.age != "" ? data["age"] = genderUser.age : nil
+        genderUser.livecity != "" ? data["livecity"] = genderUser.livecity : nil
+        genderUser.description != "" ? data["description"] = genderUser.description : nil
+        genderUser.gender != "" ? data["gender"] = genderUser.gender : nil
+        genderUser.interest != "" ? data["interest"] = genderUser.interest : nil
+        genderUser.photos != [] ? data["photos"] = genderUser.photos : nil
+        genderUser.hobies != [] ? data["hobies"] = genderUser.hobies : nil
+        genderUser.likes != [] ? data["likes"] = genderUser.likes : nil
+        genderUser.dislike != [] ? data["dislike"] = genderUser.dislike : nil
+        genderUser.superlike != [] ? data["superlike"] = genderUser.superlike : nil
         
         return data
     }

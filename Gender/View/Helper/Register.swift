@@ -79,68 +79,10 @@ struct Register: View {
                     
                     Divider().padding(.leading, 80)
                     
-                    HStack {
-                        Image(systemName: "person.crop.circle.fill")
-                            .foregroundColor(black)
-                            .frame(width: 44, height: 44)
-                            .background(.thinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
-                            .padding(.leading)
-                        
-                        SecureField("Name".uppercased(), text: $homeViewModel.name)
-                            .keyboardType(.default)
-                            .font(.subheadline)
-                            .padding(.leading)
-                            .frame(height: 44)
-                            .onTapGesture {
-                                homeViewModel.isFocused = true
-                            }
-                    }
                     
-                    Divider().padding(.leading, 80)
-                    
-                    HStack {
-                        Image(systemName: "tag")
-                            .foregroundColor(black)
-                            .frame(width: 44, height: 44)
-                            .background(.thinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
-                            .padding(.leading)
-                        
-                        SecureField("Surname".uppercased(), text: $homeViewModel.surname)
-                            .keyboardType(.default)
-                            .font(.subheadline)
-                            .padding(.leading)
-                            .frame(height: 44)
-                            .onTapGesture {
-                                homeViewModel.isFocused = true
-                            }
-                    }
-                    
-                    Divider().padding(.leading, 80)
-                    
-                    HStack {
-                        Image(systemName: "calendar")
-                            .foregroundColor(black)
-                            .frame(width: 44, height: 44)
-                            .background(.thinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
-                            .padding(.leading)
-                        
-                        SecureField("Age".uppercased(), text: $homeViewModel.age)
-                            .keyboardType(.default)
-                            .font(.subheadline)
-                            .padding(.leading)
-                            .frame(height: 44)
-                            .onTapGesture {
-                                homeViewModel.isFocused = true
-                            }
-                    }
+
                 }
-                .frame(height: 312)
+                .frame(height: 136)
                 .frame(maxWidth: 712)
                 .background(cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))

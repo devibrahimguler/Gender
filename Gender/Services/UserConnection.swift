@@ -8,7 +8,7 @@
 import Firebase
 
 protocol AuthProtocol {
-    func getUsername() -> String
+    func getCurrentUser() -> User?
     func logout()
     func isConnected() -> Bool
     func loginUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ())
@@ -19,15 +19,9 @@ struct UserConnection : AuthProtocol {
     
     let auth : Auth = Auth.auth()
     
-    func getUsername() -> String {
-        if let currentUser = auth.currentUser {
-            if let email = currentUser.email {
-                let username =  email.split(separator: "@")[0]
-                return String(username)
-            }
-          
-        }
-        return ""
+    func getCurrentUser() -> User? {
+        guard let currentUser = auth.currentUser else { return nil}
+        return currentUser
     }
     
     func logout() {
@@ -40,7 +34,8 @@ struct UserConnection : AuthProtocol {
     }
     
     func isConnected() -> Bool {
-        if auth.currentUser != nil {
+        if let auth = auth.currentUser {
+            print(auth.description)
             return true
         }
         return false

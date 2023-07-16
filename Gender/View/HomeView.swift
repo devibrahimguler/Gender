@@ -17,7 +17,7 @@ struct HomeView: View {
                 .environmentObject(homeViewModel)
             
         } else {
-            if !homeViewModel.isConnected {
+            if homeViewModel.isConnected {
                 RouterView()
                     .environmentObject(homeViewModel)
                 

@@ -26,7 +26,7 @@ struct RouterView: View {
             
             bG
                 .frame(width:  homeViewModel.isProfile ? getRect().width : nil,  height:  homeViewModel.isProfile ? getRect().height / 1.2 : nil)
-                .cornerRadius(homeViewModel.isProfile ? 50 : 0)
+                .cornerRadius( 50 )
                 .offset(x: homeViewModel.isProfile ? getRect().width / 2 : 0)
                 .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
                 .ignoresSafeArea()

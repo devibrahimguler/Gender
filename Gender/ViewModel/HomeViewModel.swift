@@ -9,8 +9,8 @@ import Foundation
 
 class HomeViewModel : ObservableObject{
     
-    @Published var currentUser : User = User(username: "", photos: [], name: "", surname: "", age: "", description: "", hobies: [], likes: [], dislike: [], superlike: [])
-    @Published var users : [User] = []
+    @Published var currentUser : GenderUser = GenderUser(username: "", name: "", surname: "", age: "",livecity:"", description: "", gender : "", interest : "" ,photos: [], hobies: [], likes: [], dislike: [], superlike: [])
+    @Published var users : [GenderUser] = []
     @Published var isConnected : Bool = false
     @Published var isLogin : Bool = true
     @Published var isFocused = false
@@ -18,7 +18,18 @@ class HomeViewModel : ObservableObject{
     @Published var isProfile = false
     @Published var isSettings = false
     @Published var isStartSearched = false
-
+    
+    @Published var defineCount = 1
+    @Published var defineBirthDayD1 = ""
+    @Published var defineBirthDayD2 = ""
+    @Published var defineBirthDayM1 = ""
+    @Published var defineBirthDayM2 = ""
+    @Published var defineBirthDayY1 = ""
+    @Published var defineBirthDayY2 = ""
+    @Published var defineBirthDayY3 = ""
+    @Published var defineBirthDayY4 = ""
+    
+    @Published var definePosition : CGPoint = CGPoint()
     
     @Published var rotation = 30.0
     
@@ -75,40 +86,33 @@ class HomeViewModel : ObservableObject{
     func registerUser() {
         if self.email != "" {
             if self.password != "" {
-                if self.name != "" {
-                    if self.surname != "" {
-                        if self.age != "" {
-                            self.isProgress = true
-                            let username = self.email.split(separator: "@")[0]
-                            let user : User = User(username: String(username), photos: [], name: self.name, surname: self.surname, age: self.age, description: "", hobies: [], likes: [], dislike: [], superlike: [])
-                            DispatchQueue.main.async {
-                                self.userConnection.registerUser(email: self.email, password: self.password) { result in
-                                    switch result {
-                                    case .failure(_):
-                                        print("Hata !")
-                                        self.isProgress = false
-                                    case .success(let auth):
-                                        print(auth)
-                                        self.userData.addUser(user: user) { added in
-                                            switch added {
-                                            case .failure(_):
-                                                print("Hata !")
-                                                self.isProgress = false
-                                            case .success(let add):
-                                                print(add)
-                                                self.isConnected = true
-                                                self.email = ""
-                                                self.password = ""
-                                                self.name = ""
-                                                self.surname = ""
-                                                self.age = ""
-                                                self.isProgress = false
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                DispatchQueue.main.async {
+                    self.userConnection.registerUser(email: self.email, password: self.password) { result in
+                        switch result {
+                        case .failure(_):
+                            print("Hata !")
+                            self.isProgress = false
+                        case .success(let auth):
+                            print(auth)
+                            self.isConnected = true
+                            self.isProgress = false
+                            self.email = ""
+                            self.password = ""
                         }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func definateUser() {
+        if self.currentUser.name != "" || self.currentUser.surname != ""  {
+            if self.currentUser.livecity != "" || self.currentUser.description != "" || self.currentUser.gender != "" || self.currentUser.interest != "" {
+                if self.currentUser.age != "" {
+                    if self.currentUser.photos != [] {
+                        
+                        
                     }
                 }
             }
@@ -126,7 +130,7 @@ class HomeViewModel : ObservableObject{
                 if let data = data {
                     self.users = data
                     self.currentUser =  self.users.filter { user in
-                        user.username == self.userConnection.getUsername()
+                        user.username == self.userConnection.getCurrentUser()?.email?.split(separator: "@")[0] ?? ""
                     }.first!
                     self.isProgress = false
                 }
