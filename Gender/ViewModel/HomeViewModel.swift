@@ -5,11 +5,13 @@
 //  Created by İbrahim Güler on 30.06.2023.
 //
 
-import Foundation
+import SwiftUI
+import PhotosUI
 
 class HomeViewModel : ObservableObject{
     
-    @Published var currentUser : GenderUser = GenderUser(username: "", name: "", surname: "", age: "",livecity:"", description: "", gender : "", interest : "" ,photos: [], hobies: [], likes: [], dislike: [], superlike: [])
+    @Published var currentUser : GenderUser?
+    
     @Published var users : [GenderUser] = []
     @Published var isConnected : Bool = false
     @Published var isLogin : Bool = true
@@ -19,25 +21,8 @@ class HomeViewModel : ObservableObject{
     @Published var isSettings = false
     @Published var isStartSearched = false
     
-    @Published var defineCount = 1
-    @Published var defineBirthDayD1 = ""
-    @Published var defineBirthDayD2 = ""
-    @Published var defineBirthDayM1 = ""
-    @Published var defineBirthDayM2 = ""
-    @Published var defineBirthDayY1 = ""
-    @Published var defineBirthDayY2 = ""
-    @Published var defineBirthDayY3 = ""
-    @Published var defineBirthDayY4 = ""
-    
-    @Published var definePosition : CGPoint = CGPoint()
-    
-    @Published var rotation = 30.0
-    
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var name: String = ""
-    @Published var surname: String = ""
-    @Published var age: String = ""
     
     let userData : FirestoreProtocol = UserData()
     let userConnection : AuthProtocol = UserConnection()
@@ -94,6 +79,7 @@ class HomeViewModel : ObservableObject{
                             self.isProgress = false
                         case .success(let auth):
                             print(auth)
+                            self.addingUser()
                             self.isConnected = true
                             self.isProgress = false
                             self.email = ""
@@ -103,20 +89,24 @@ class HomeViewModel : ObservableObject{
                 }
             }
         }
-        
     }
     
-    func definateUser() {
-        if self.currentUser.name != "" || self.currentUser.surname != ""  {
-            if self.currentUser.livecity != "" || self.currentUser.description != "" || self.currentUser.gender != "" || self.currentUser.interest != "" {
-                if self.currentUser.age != "" {
-                    if self.currentUser.photos != [] {
-                        
-                        
+    func addingUser() {
+        self.currentUser = GenderUser(username: "", name: "", age: "",livecity:"", description: "", gender : "", orientation: [], interest : "", distance : "", wantLook : "",school: "", isVisibleGender: false ,photos: [], hobies: [], likes: [], dislike: [], superlike: [])
+        
+        if let user = self.currentUser {
+            self.userData.addUser(genderUser: user) { result in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: .init(block: {
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case.success(let succ):
+                        print(succ)
                     }
-                }
+                }))
             }
         }
+        
     }
     
     func getUsersData() {
@@ -129,9 +119,33 @@ class HomeViewModel : ObservableObject{
             case .success(let data):
                 if let data = data {
                     self.users = data
+                    
                     self.currentUser =  self.users.filter { user in
                         user.username == self.userConnection.getCurrentUser()?.email?.split(separator: "@")[0] ?? ""
-                    }.first!
+                    }.first
+                    /*
+                     
+                 
+                    if let user = self.currentUser {
+                        if user.name == "" {
+                            self.defineCount = 1
+                        } else if user.age == "" {
+                            self.defineCount = 2
+                        } else if user.gender == "" {
+                            self.defineCount = 3
+                        } else if user.interest == "" {
+                            self.defineCount = 5
+                        } else if user.distance == "" {
+                            self.defineCount = 6
+                        } else if user.wantLook == "" {
+                            self.defineCount = 7
+                        } else if user.photos.count < 2 {
+                            self.defineCount = 10
+                        } else {
+                            self.isDefineUser = true
+                        }
+                    }
+                     */
                     self.isProgress = false
                 }
             }

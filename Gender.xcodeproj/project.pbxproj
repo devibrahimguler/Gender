@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F11A01A2A76478000CBE0CB /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F11A0192A76478000CBE0CB /* CropView.swift */; };
 		0F127EE12A59F003000E681B /* DefineNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F127EE02A59F003000E681B /* DefineNames.swift */; };
 		0F20C2B32A50399C009026D6 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B22A50399C009026D6 /* Login.swift */; };
 		0F20C2B52A5039A5009026D6 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B42A5039A5009026D6 /* Register.swift */; };
@@ -26,10 +27,16 @@
 		0F49BFA82A4F1F64005EF07F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F49BFA72A4F1F64005EF07F /* FirebaseStorage */; };
 		0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFA92A4F2402005EF07F /* UserData.swift */; };
 		0F49BFAE2A4F568B005EF07F /* UserConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFAD2A4F568B005EF07F /* UserConnection.swift */; };
+		0F4BB4952A76C14000E9CEDA /* DefineUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4BB4942A76C14000E9CEDA /* DefineUserViewModel.swift */; };
 		0F69680B2A54BCC800B8D60F /* DefineUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F69680A2A54BCC800B8D60F /* DefineUser.swift */; };
 		0F6968132A54BD4F00B8D60F /* DefinePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */; };
-		0F6968152A54BD9200B8D60F /* DefinePersonnelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6968142A54BD9200B8D60F /* DefinePersonnelData.swift */; };
 		0F6968172A54BDC200B8D60F /* DefineHobies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6968162A54BDC200B8D60F /* DefineHobies.swift */; };
+		0F8B7A732A757DE900D83269 /* BirtDayAtDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A722A757DE900D83269 /* BirtDayAtDay.swift */; };
+		0F8B7A752A757EC800D83269 /* BirtDayAtMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A742A757EC800D83269 /* BirtDayAtMonth.swift */; };
+		0F8B7A772A757EDA00D83269 /* BirtDayAtYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A762A757EDA00D83269 /* BirtDayAtYear.swift */; };
+		0F8B7A7A2A758A6100D83269 /* ListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A792A758A6100D83269 /* ListButton.swift */; };
+		0F8B7A7C2A758FE200D83269 /* LookSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A7B2A758FE200D83269 /* LookSelectButton.swift */; };
+		0F8B7A7F2A759D9A00D83269 /* PhotoSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */; };
 		0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48602A5174DA00CB87A5 /* Profile.swift */; };
 		0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48622A51752700CB87A5 /* RouterView.swift */; };
 		0FC3B8552A64446500350883 /* DefineBirthDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3B8542A64446500350883 /* DefineBirthDay.swift */; };
@@ -55,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F11A0192A76478000CBE0CB /* CropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
 		0F127EE02A59F003000E681B /* DefineNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineNames.swift; sourceTree = "<group>"; };
 		0F20C2B22A50399C009026D6 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0F20C2B42A5039A5009026D6 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
@@ -73,10 +81,17 @@
 		0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		0F49BFA92A4F2402005EF07F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0F49BFAD2A4F568B005EF07F /* UserConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConnection.swift; sourceTree = "<group>"; };
+		0F4BB4942A76C14000E9CEDA /* DefineUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineUserViewModel.swift; sourceTree = "<group>"; };
 		0F69680A2A54BCC800B8D60F /* DefineUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineUser.swift; sourceTree = "<group>"; };
 		0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinePhoto.swift; sourceTree = "<group>"; };
-		0F6968142A54BD9200B8D60F /* DefinePersonnelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinePersonnelData.swift; sourceTree = "<group>"; };
 		0F6968162A54BDC200B8D60F /* DefineHobies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineHobies.swift; sourceTree = "<group>"; };
+		0F8B7A722A757DE900D83269 /* BirtDayAtDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirtDayAtDay.swift; sourceTree = "<group>"; };
+		0F8B7A742A757EC800D83269 /* BirtDayAtMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirtDayAtMonth.swift; sourceTree = "<group>"; };
+		0F8B7A762A757EDA00D83269 /* BirtDayAtYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirtDayAtYear.swift; sourceTree = "<group>"; };
+		0F8B7A792A758A6100D83269 /* ListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListButton.swift; sourceTree = "<group>"; };
+		0F8B7A7B2A758FE200D83269 /* LookSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookSelectButton.swift; sourceTree = "<group>"; };
+		0F8B7A7D2A75989200D83269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorButton.swift; sourceTree = "<group>"; };
 		0FBB48602A5174DA00CB87A5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0FBB48622A51752700CB87A5 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		0FC3B8542A64446500350883 /* DefineBirthDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineBirthDay.swift; sourceTree = "<group>"; };
@@ -145,6 +160,7 @@
 		0F49BF672A4F1062005EF07F /* Gender */ = {
 			isa = PBXGroup;
 			children = (
+				0F8B7A7D2A75989200D83269 /* Info.plist */,
 				0F49BF7F2A4F1477005EF07F /* Services */,
 				0F49BF7B2A4F10C6005EF07F /* ViewModel */,
 				0F49BF7C2A4F10CD005EF07F /* Model */,
@@ -183,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				0F49BF802A4F1521005EF07F /* HomeViewModel.swift */,
+				0F4BB4942A76C14000E9CEDA /* DefineUserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -232,18 +249,32 @@
 		0F6968112A54BCFF00B8D60F /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */,
-				0F6968142A54BD9200B8D60F /* DefinePersonnelData.swift */,
-				0F6968162A54BDC200B8D60F /* DefineHobies.swift */,
+				0F8B7A782A758A2E00D83269 /* Helper */,
 				0F127EE02A59F003000E681B /* DefineNames.swift */,
 				0FC3B8542A64446500350883 /* DefineBirthDay.swift */,
-				0FC3B8562A64546A00350883 /* BirtDaySelection.swift */,
 				0FC3B8582A645BDB00350883 /* DefineGender.swift */,
 				0FC3B85A2A645E7300350883 /* DefineOrientation.swift */,
 				0FC3B85C2A6462A200350883 /* DefineInterested.swift */,
 				0FC3B85E2A64643100350883 /* DefineDistance.swift */,
 				0FC3B8602A64736100350883 /* DefineLook.swift */,
 				0FC3B8622A64754000350883 /* DefineSchool.swift */,
+				0F6968162A54BDC200B8D60F /* DefineHobies.swift */,
+				0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		0F8B7A782A758A2E00D83269 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0FC3B8562A64546A00350883 /* BirtDaySelection.swift */,
+				0F8B7A722A757DE900D83269 /* BirtDayAtDay.swift */,
+				0F8B7A742A757EC800D83269 /* BirtDayAtMonth.swift */,
+				0F8B7A762A757EDA00D83269 /* BirtDayAtYear.swift */,
+				0F8B7A792A758A6100D83269 /* ListButton.swift */,
+				0F8B7A7B2A758FE200D83269 /* LookSelectButton.swift */,
+				0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */,
+				0F11A0192A76478000CBE0CB /* CropView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -358,31 +389,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8B7A7A2A758A6100D83269 /* ListButton.swift in Sources */,
 				0FC3B8632A64754000350883 /* DefineSchool.swift in Sources */,
+				0F8B7A7C2A758FE200D83269 /* LookSelectButton.swift in Sources */,
 				0FEBB2F32A521ABD005B5C45 /* SettingsView.swift in Sources */,
 				0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */,
 				0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */,
 				0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */,
 				0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */,
+				0F4BB4952A76C14000E9CEDA /* DefineUserViewModel.swift in Sources */,
+				0F8B7A7F2A759D9A00D83269 /* PhotoSelectorButton.swift in Sources */,
 				0F127EE12A59F003000E681B /* DefineNames.swift in Sources */,
 				0FC3B85D2A6462A200350883 /* DefineInterested.swift in Sources */,
-				0F6968152A54BD9200B8D60F /* DefinePersonnelData.swift in Sources */,
 				0F69680B2A54BCC800B8D60F /* DefineUser.swift in Sources */,
 				0F20C2B52A5039A5009026D6 /* Register.swift in Sources */,
 				0FC3B85B2A645E7300350883 /* DefineOrientation.swift in Sources */,
 				0F20C2B92A50944F009026D6 /* GenderProgress.swift in Sources */,
 				0F6968132A54BD4F00B8D60F /* DefinePhoto.swift in Sources */,
 				0F20C2BB2A50D76D009026D6 /* Home.swift in Sources */,
+				0F8B7A752A757EC800D83269 /* BirtDayAtMonth.swift in Sources */,
 				0FC3B8572A64546A00350883 /* BirtDaySelection.swift in Sources */,
 				0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */,
 				0F49BF7E2A4F10FB005EF07F /* GenderUser.swift in Sources */,
 				0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */,
 				0F20C2B32A50399C009026D6 /* Login.swift in Sources */,
+				0F11A01A2A76478000CBE0CB /* CropView.swift in Sources */,
 				0FC3B8592A645BDB00350883 /* DefineGender.swift in Sources */,
+				0F8B7A732A757DE900D83269 /* BirtDayAtDay.swift in Sources */,
 				0FC3B8552A64446500350883 /* DefineBirthDay.swift in Sources */,
 				0F49BFAE2A4F568B005EF07F /* UserConnection.swift in Sources */,
 				0F49BF692A4F1062005EF07F /* GenderApp.swift in Sources */,
 				0FC3B85F2A64643100350883 /* DefineDistance.swift in Sources */,
+				0F8B7A772A757EDA00D83269 /* BirtDayAtYear.swift in Sources */,
 				0F6968172A54BDC200B8D60F /* DefineHobies.swift in Sources */,
 				0F20C2B72A5039F0009026D6 /* EntryView.swift in Sources */,
 				0FC3B8612A64736100350883 /* DefineLook.swift in Sources */,
@@ -533,6 +571,8 @@
 				DEVELOPMENT_TEAM = H6YXW4WBS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gender/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Use for Match\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -562,6 +602,8 @@
 				DEVELOPMENT_TEAM = H6YXW4WBS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gender/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Use for Match\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

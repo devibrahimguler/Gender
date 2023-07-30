@@ -39,9 +39,7 @@ struct BirtDaySelection: View {
                         self.text = filtered
                     }
                 }
-             
-            
-            Divider()
+                .underline()
         }
     }
 }

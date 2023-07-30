@@ -12,12 +12,16 @@ struct GenderUser : Codable, Identifiable {
     var id : String = UUID().uuidString
     var username : String
     var name : String
-    var surname : String
     var age : String
     var livecity : String
     var description : String
     var gender : String
+    var orientation : [String]
     var interest : String
+    var distance : String
+    var wantLook : String
+    var school : String
+    var isVisibleGender : Bool
     var photos : [String]
     var hobies : [String]
     var likes : [String]

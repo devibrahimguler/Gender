@@ -9,24 +9,24 @@ import SwiftUI
 
 struct DefineNames: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                
             } label: {
                 Image(systemName: "multiply")
                     .font(.system(size: 50))
-                    .padding(.bottom, 20)
                     .foregroundColor(.gray)
             }
+            .padding(.bottom)
 
             Text("What is your name?")
                 .font(.system(size: 40, weight: .bold))
             
-            TextField("enter your name".uppercased(), text: $homeViewModel.name)
+            TextField("enter your name".uppercased(), text: $defineUserViewModel.name)
                 .keyboardType(.namePhonePad)
                 .textInputAutocapitalization(.never)
                 .font(.headline.weight(.bold))
@@ -42,17 +42,18 @@ struct DefineNames: View {
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(defineUserViewModel.name == "" ? .gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
+            .disabled(defineUserViewModel.name == "")
       
         }
         .padding(20)
@@ -62,6 +63,6 @@ struct DefineNames: View {
 struct DefineNames_Previews: PreviewProvider {
     static var previews: some View {
         DefineNames()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
     }
 }

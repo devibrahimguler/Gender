@@ -9,38 +9,39 @@ import SwiftUI
 
 struct DefineInterested: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineUserViewModel.defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
-                    .padding(.bottom, 20)
                     .foregroundColor(.gray)
             }
+            .padding(.bottom)
 
             Text("Who are you interested in seeing?")
                 .font(.system(size: 40, weight: .bold))
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.selectedInterested = "Female"
             } label: {
                 RoundedRectangle(cornerRadius: 50)
                     .stroke(lineWidth: 2)
                     .overlay {
                         Text("Female")
                             .font(.largeTitle)
+                            .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(.gray)
+                    .foregroundColor(defineUserViewModel.selectedInterested == "Female" ? .red : .gray)
             }
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.selectedInterested = "Male"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -48,13 +49,14 @@ struct DefineInterested: View {
                     .overlay {
                         Text("Male")
                             .font(.largeTitle)
+                            .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(.gray)
+                    .foregroundColor(defineUserViewModel.selectedInterested == "Male" ? .blue : .gray)
             }
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.selectedInterested = "Everyone"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -62,15 +64,16 @@ struct DefineInterested: View {
                     .overlay {
                         Text("Everyone")
                             .font(.largeTitle)
+                            .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(.gray)
+                    .foregroundColor(defineUserViewModel.selectedInterested == "Everyone" ? .purple : .gray)
             }
             
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -90,6 +93,6 @@ struct DefineInterested: View {
 struct DefineInterested_Previews: PreviewProvider {
     static var previews: some View {
         DefineInterested()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
     }
 }

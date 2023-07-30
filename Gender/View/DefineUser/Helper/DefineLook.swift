@@ -9,19 +9,19 @@ import SwiftUI
 
 struct DefineLook: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineUserViewModel.defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
-                    .padding(.bottom, 20)
                     .foregroundColor(.gray)
             }
+            .padding(.bottom)
             
             Text("What I'm looking for right now...")
                 .font(.system(size: 40, weight: .bold))
@@ -33,62 +33,12 @@ struct DefineLook: View {
             
             
             HStack {
-                Button {
-                    
-                } label: {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(.gray)
-                        .overlay {
-                            VStack {
-                                Text("💖")
-                                    .font(.title)
-                                
-                                Text("USİ")
-                                    .font(.title)
-                            }
-                            .foregroundColor(.black)
-                        }
-                }
                 
-                Button {
-                    
-                } label: {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(.gray)
-                        .overlay {
-                            VStack {
-                                Text("😍")
-                                    .font(.title)
-                                
-                                Text("UİKO")
-                                    .font(.title)
-                            }
-                            .foregroundColor(.black)
-                        }
-                    
-                }
-                
-                Button {
-                    
-                } label: {
-                    
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(.gray)
-                        .overlay {
-                            VStack {
-                                Text("🥂")
-                                    .font(.title)
-                                
-                                Text("KİUO")
-                                    .font(.title)
-                            }
-                            .foregroundColor(.black)
-                        }
-                    
-                }
-                
-                
-                
+                LookSelectButton(header: "💖", text: "USİ")
+      
+                LookSelectButton(header: "😍", text: "UİKO")
+            
+                LookSelectButton(header: "🥂", text: "KİUO")
                 
             }
             .frame(height: 150)
@@ -96,7 +46,7 @@ struct DefineLook: View {
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineUserViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -116,6 +66,6 @@ struct DefineLook: View {
 struct DefineLook_Previews: PreviewProvider {
     static var previews: some View {
         DefineLook()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
     }
 }

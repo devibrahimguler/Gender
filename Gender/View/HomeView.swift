@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+    @StateObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
     
     var body: some View {
         if homeViewModel.isProgress {
@@ -18,8 +19,13 @@ struct HomeView: View {
             
         } else {
             if homeViewModel.isConnected {
-                RouterView()
-                    .environmentObject(homeViewModel)
+                if defineUserViewModel.isDefineUser {
+                    RouterView()
+                        .environmentObject(homeViewModel)
+                } else {
+                    DefineUser()
+                        .environmentObject(defineUserViewModel)
+                }
                 
             } else {
                 EntryView()

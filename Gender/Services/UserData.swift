@@ -27,7 +27,7 @@ struct UserData : FirestoreProtocol {
                 return
             }
             data = documents.compactMap({ query in
-                var user : GenderUser = GenderUser(username: "", name: "", surname: "", age: "",livecity:"", description: "",gender: "",interest: "",photos: [], hobies: [], likes: [], dislike: [], superlike: [])
+                var user : GenderUser = GenderUser(username: "", name: "", age: "",livecity:"", description: "", gender : "", orientation: [], interest : "", distance : "", wantLook : "",school: "", isVisibleGender: false ,photos: [], hobies: [], likes: [], dislike: [], superlike: [])
                 
                 for i in query.data() {
                     if let list = i.value as? [String] {
@@ -49,8 +49,6 @@ struct UserData : FirestoreProtocol {
                             user.username = "\(i.value)"
                         }  else if i.key == "name" {
                             user.name = "\(i.value)"
-                        } else if i.key == "surname" {
-                            user.surname = "\(i.value)"
                         } else if i.key == "age" {
                             user.age = "\(i.value)"
                         } else if i.key == "description" {
@@ -99,7 +97,6 @@ struct UserData : FirestoreProtocol {
         genderUser.id != "" ? data["id"] = genderUser.id : nil
         genderUser.username != "" ? data["username"] = genderUser.username : nil
         genderUser.name != "" ? data["name"] = genderUser.name : nil
-        genderUser.surname != "" ? data["surname"] = genderUser.surname : nil
         genderUser.age != "" ? data["age"] = genderUser.age : nil
         genderUser.livecity != "" ? data["livecity"] = genderUser.livecity : nil
         genderUser.description != "" ? data["description"] = genderUser.description : nil
