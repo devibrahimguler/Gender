@@ -11,10 +11,6 @@ struct Login: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
-    private let black : Color = Color("Black")
-    private let cardBG : Color = Color("CardBG")
-    private let bG : Color = Color("BG")
-    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -23,7 +19,7 @@ struct Login: View {
                 Spacer(minLength: 10)
                 
                 Text("Gender")
-                    .foregroundColor(black)
+                    .foregroundColor(homeViewModel.black)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
                     .offset(y: homeViewModel.isFocused ? -300 : 0)
@@ -38,7 +34,7 @@ struct Login: View {
                     HStack {
                         
                         Image(systemName: "envelope")
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -60,7 +56,7 @@ struct Login: View {
                     
                     HStack {
                         Image(systemName: "lock.fill")
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -79,23 +75,23 @@ struct Login: View {
                 }
                 .frame(height: 136)
                 .frame(maxWidth: 712)
-                .background(cardBG)
+                .background(homeViewModel.cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
                 
                 Button(action: {
                     homeViewModel.loginUser()
                 }) {
                     Text("Log in")
-                        .foregroundColor(black)
+                        .foregroundColor(homeViewModel.black)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(12)
                 .padding(.horizontal, 20)
-                .background(cardBG)
+                .background(homeViewModel.cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
            
                 
@@ -106,7 +102,7 @@ struct Login: View {
                     }) {
                         Text("Forgot password ?")
                             .font(.subheadline)
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                     }
                     .padding(2)
 
@@ -118,7 +114,7 @@ struct Login: View {
                     }) {
                         Text("Click for Register !")
                             .font(.subheadline)
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                     }
                     .padding(2)
                 }
@@ -132,7 +128,7 @@ struct Login: View {
         .offset(x:homeViewModel.isLogin ? 0 : getRect().width * 2, y: homeViewModel.isFocused ? -300 : 0)
         .animation(.easeInOut, value: homeViewModel.isFocused)
         .animation(.easeInOut, value: homeViewModel.isLogin)
-        .background(bG)
+        .background(homeViewModel.bG)
         .onTapGesture {
             homeViewModel.isFocused = false
             

@@ -9,36 +9,29 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
-    @StateObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
     
     var body: some View {
         if homeViewModel.isProgress {
-            
             GenderProgress()
                 .environmentObject(homeViewModel)
-            
         } else {
             if homeViewModel.isConnected {
-                if defineUserViewModel.isDefineUser {
-                    RouterView()
-                        .environmentObject(homeViewModel)
-                } else {
-                    DefineUser()
-                        .environmentObject(defineUserViewModel)
-                }
-                
-            } else {
                 EntryView()
                     .environmentObject(homeViewModel)
+            } else {
+                RouterView()
+                    .environmentObject(homeViewModel)
+                    .fullScreenCover(isPresented: $homeViewModel.isDefineUser) {
+                        DefineUser()
+                            .environmentObject(homeViewModel)
+                    }
             }
         }
-        
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

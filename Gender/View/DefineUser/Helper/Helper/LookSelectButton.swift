@@ -9,17 +9,23 @@ import SwiftUI
 
 struct LookSelectButton: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var selected : String
     var header : String
     var text : String
+    
+    init(selected: Binding<String>, header: String, text: String) {
+        self._selected = selected
+        self.header = header
+        self.text = text
+    }
     
     var body: some View {
         VStack {
             Button {
-                homeViewModel.selectedLook = self.text
+                self.selected = self.text
             } label: {
                 RoundedRectangle(cornerRadius: 25)
-                    .fill( homeViewModel.selectedLook == self.text ? .blue : .gray)
+                    .fill( self.selected == self.text ? .blue : .gray)
                     .overlay {
                         VStack {
                             Text(header)
@@ -32,12 +38,5 @@ struct LookSelectButton: View {
                     }
             }
         }
-    }
-}
-
-struct LookSelectButton_Previews: PreviewProvider {
-    static var previews: some View {
-        LookSelectButton(header: "", text: "")
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

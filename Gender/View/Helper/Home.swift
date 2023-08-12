@@ -11,10 +11,6 @@ struct Home: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
-    private let black : Color = Color("Black")
-    private let orange : Color = Color("Orange")
-    private let bG : Color = Color("BG")
-    
     var body: some View {
         VStack {
             
@@ -24,14 +20,14 @@ struct Home: View {
                     homeViewModel.isProfile.toggle()
                 } label: {
                     RoundedRectangle(cornerRadius: 7)
-                        .fill(orange)
+                        .fill(homeViewModel.orange)
                         .frame(width: 40, height: 40)
                         .overlay {
                             Image(systemName: homeViewModel.isProfile ? "multiply": "line.3.horizontal")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 20, height: 20)
-                                .foregroundColor(bG)
+                                .foregroundColor(homeViewModel.bG)
                         }
                     
                     
@@ -42,42 +38,67 @@ struct Home: View {
             
             Spacer()
             
-            RoundedRectangle(cornerRadius: 25)
-                .stroke(lineWidth: 3)
-                .overlay {
-                    if homeViewModel.isStartSearched {
-                        
-                    } else {
-                        Button {
-                            homeViewModel.isStartSearched = true
-                        } label: {
-                            ZStack {
-                                Text("Click for Start")
-                                    .font(.system(size: 100, design: .rounded).bold())
-                                    .foregroundColor(black)
-                                
-                                Image(systemName: "i.square")
+            VStack {
+                if homeViewModel.isStartSearched {
+                    if homeViewModel.randomPhoto.count > 0 {
+                        if let data = homeViewModel.randomPhoto[homeViewModel.photoId] {
+                            VStack {
+                                Image(uiImage: data)
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .padding(20)
-                                    .blur(radius: homeViewModel.isStartSearched ? 0 : 20)
-                                    .foregroundColor(black)
+                                    .cornerRadius(30)
+                                
+                                Spacer()
+                                HStack {
+                                    ForEach(0...homeViewModel.randomPhoto.count - 1, id:\.self) { i in
+                                        
+                                        Button {
+                                            homeViewModel.photoId = i
+                                        } label: {
+                                            Circle()
+                                                .foregroundColor(homeViewModel.photoId == i ? .blue : .gray)
+                                                .animation(.easeInOut, value: homeViewModel.photoId == i)
+                                                .frame(width: 20)
+                                            
+                                        }
+                                    }
+                                }
                             }
+                            
                         }
-                        
+                    }
+                }
+                else {
+                    Button {
+                        homeViewModel.getUser()
+                        homeViewModel.isStartSearched = true
+                    } label: {
+                        ZStack {
+                            Text("Click for Start")
+                                .font(.system(size: 100, design: .rounded).bold())
+                                .foregroundColor(homeViewModel.black)
+                            
+                            Image(systemName: "i.square")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
+                                .blur(radius: homeViewModel.isStartSearched ? 0 : 20)
+                                .foregroundColor(homeViewModel.black)
+                        }
                     }
                     
                 }
-                .padding(.vertical, 30)
+            }
+            .padding(.vertical, 30)
             
             
             Spacer()
             
             HStack(spacing: 50) {
-                Image(systemName: "heart.slash.fill")
+                Image(systemName: "xmark")
                     .resizable()
+                    .bold()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
+                    .frame(width: 35, height: 35)
                     .foregroundColor(.red)
                 
                 Image(systemName: "bolt.heart.fill")
@@ -95,7 +116,7 @@ struct Home: View {
             
         }
         .padding(30)
-        .background(bG)
+        .background(homeViewModel.bG)
         .onTapGesture {
             homeViewModel.isProfile = false
         }

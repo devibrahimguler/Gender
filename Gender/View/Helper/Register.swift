@@ -11,10 +11,6 @@ struct Register: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
-    private let black : Color = Color("Black")
-    private let cardBG : Color = Color("CardBG")
-    private let bG : Color = Color("BG")
-    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -23,7 +19,7 @@ struct Register: View {
                 Spacer(minLength: 10)
                 
                 Text("Gender")
-                    .foregroundColor(black)
+                    .foregroundColor(homeViewModel.black)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
                     .offset(y: homeViewModel.isFocused ? -300 : 0)
@@ -38,11 +34,11 @@ struct Register: View {
                     HStack {
                         
                         Image(systemName: "envelope")
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: homeViewModel.black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         TextField("Your Email".uppercased(), text: $homeViewModel.email)
@@ -60,11 +56,11 @@ struct Register: View {
                     
                     HStack {
                         Image(systemName: "lock.fill")
-                            .foregroundColor(black)
+                            .foregroundColor(homeViewModel.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .shadow(color: homeViewModel.black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
                         SecureField("Password".uppercased(), text: $homeViewModel.password)
@@ -84,23 +80,23 @@ struct Register: View {
                 }
                 .frame(height: 136)
                 .frame(maxWidth: 712)
-                .background(cardBG)
+                .background(homeViewModel.cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
                 
                 Button(action: {
                     homeViewModel.registerUser()
                 }) {
                     Text("Register")
-                        .foregroundColor(black)
+                        .foregroundColor(homeViewModel.black)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(12)
                 .padding(.horizontal, 20)
-                .background(cardBG)
+                .background(homeViewModel.cardBG)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .shadow(color: black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
                 
                 Button(action: {
@@ -108,7 +104,7 @@ struct Register: View {
                 }) {
                     Text("Click for Log in !")
                         .font(.subheadline)
-                        .foregroundColor(black)
+                        .foregroundColor(homeViewModel.black)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 30)
@@ -121,7 +117,7 @@ struct Register: View {
         }
         .offset(y: homeViewModel.isFocused ? -300 : 0)
         .animation(.easeInOut, value: homeViewModel.isFocused)
-        .background(bG)
+        .background(homeViewModel.bG)
         .onTapGesture {
             homeViewModel.isFocused = false
             

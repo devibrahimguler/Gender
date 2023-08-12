@@ -11,55 +11,67 @@ struct Profile: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
-    private let bG : Color = Color("BG")
-    private let orange : Color = Color("Orange")
-    
     var body: some View {
         VStack(alignment: .center) {
-            Image(systemName: "person.crop.circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(30)
-                .foregroundColor(bG)
+            if let photo = homeViewModel.selectedPhoto.first {
+                if let data = photo {
+                    Image(uiImage: data)
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 120, height: 120)
+                        .padding(.top, 30)
+                }
+            } else {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(Circle())
+                    .frame(width: 120, height: 120)
+                    .padding(.top, 30)
+            }
+            
+          
+           
             
             VStack(spacing: 2) {
                 Text("Hallo,")
-                    .foregroundColor(bG)
+                    .foregroundColor(homeViewModel.bG)
                 
                 Text(homeViewModel.currentUser.name)
                     .font(.headline.bold())
-                    .foregroundColor(bG)
+                    .foregroundColor(homeViewModel.bG)
             }
             
             Divider()
                 .frame(height: 2)
-                .background(bG)
+                .background(homeViewModel.bG)
                 .padding(.horizontal, 20)
             
             Button {
                 homeViewModel.isSettings = true
             } label: {
                 Text("Settings")
-                    .foregroundColor(bG)
+                    .foregroundColor(homeViewModel.bG)
             }
             .padding(.bottom, 100)
             
             Divider()
                 .frame(height: 2)
-                .background(bG)
+                .background(homeViewModel.bG)
                 .padding(.horizontal, 20)
             
             Button {
                 homeViewModel.logoutUser()
             } label: {
                 Text("Logout")
-                    .foregroundColor(bG)
+                    .foregroundColor(homeViewModel.bG)
             }
 
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .background(orange)
+        .background(homeViewModel.orange)
         .fullScreenCover(isPresented: $homeViewModel.isSettings) {
             SettingsView()
         }

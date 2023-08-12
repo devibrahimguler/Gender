@@ -9,18 +9,18 @@ import SwiftUI
 
 struct DefineUser: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                ForEach(0...defineUserViewModel.defineCount, id: \.self) { i in
+                ForEach(0...homeViewModel.defineCount, id: \.self) { i in
                     
                     Rectangle()
                         .fill(.red)
                         .frame(width: getRect().width / 10, height: 10)
-                        .offset(x: defineUserViewModel.defineCount == i ? -200 : 0)
-                        .animation(.linear, value: defineUserViewModel.defineCount)
+                        .offset(x: homeViewModel.defineCount == i ? -200 : 0)
+                        .animation(.linear, value: homeViewModel.defineCount)
                     
                
                 }
@@ -30,40 +30,40 @@ struct DefineUser: View {
             
             Divider()
             
-            switch(defineUserViewModel.defineCount) {
+            switch(homeViewModel.defineCount) {
             case 1:
                 DefineNames()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 2:
                 DefineBirthDay()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 3:
                 DefineGender()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 4:
                 DefineOrientation()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 5:
                 DefineInterested()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 6:
                 DefineDistance()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 7:
                 DefineLook()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 8:
                 DefineSchool()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 9:
                 DefineHobies()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             case 10:
                 DefinePhoto()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             default:
                 RouterView()
-                    .environmentObject(defineUserViewModel)
+                    .environmentObject(homeViewModel)
             }
             
             Spacer()
@@ -74,7 +74,7 @@ struct DefineUser: View {
 struct DefineUser_Previews: PreviewProvider {
     static var previews: some View {
         DefineUser()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }
 

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DefineSchool: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             HStack {
                 Button {
-                    defineUserViewModel.defineCount -= 1
+                    homeViewModel.defineCount -= 1
                 } label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 50))
@@ -26,7 +26,7 @@ struct DefineSchool: View {
                 Spacer(minLength: 10)
                 
                 Button {
-                    defineUserViewModel.defineCount += 1
+                    homeViewModel.defineCount += 1
                 } label: {
                     Text("Skip")
                         .font(.system(size: 30))
@@ -38,7 +38,7 @@ struct DefineSchool: View {
             Text("If you want to write your school...")
                 .font(.system(size: 40, weight: .bold))
             
-            TextField("Enter the name of your school".uppercased(), text: $defineUserViewModel.selectedSchool)
+            TextField("Enter the name of your school".uppercased(), text: $homeViewModel.selectedSchool)
                 .keyboardType(.namePhonePad)
                 .textInputAutocapitalization(.never)
                 .font(.headline.weight(.bold))
@@ -51,21 +51,21 @@ struct DefineSchool: View {
             Spacer(minLength: 10)
             
             Button {
-                if defineUserViewModel.selectedSchool != "" {
-                    defineUserViewModel.defineCount += 1
+                if homeViewModel.selectedSchool != "" {
+                    homeViewModel.defineCount += 1
                 }
           
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(defineUserViewModel.selectedSchool == "" ? .gray : .red)
+                    .background(homeViewModel.selectedSchool == "" ? .gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
-            .disabled(defineUserViewModel.selectedSchool == "")
+            .disabled(homeViewModel.selectedSchool == "")
       
         }
         .padding(20)
@@ -75,6 +75,6 @@ struct DefineSchool: View {
 struct DefineSchool_Previews: PreviewProvider {
     static var previews: some View {
         DefineSchool()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

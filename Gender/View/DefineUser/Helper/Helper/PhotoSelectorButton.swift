@@ -10,11 +10,11 @@ import PhotosUI
 
 struct PhotoSelectorButton: View {
     var crop : CGSize = .init(width: 340, height: 500)
-    @Binding var selectedImage : UIImage?
+    @State var selectedImage : UIImage?
     @State private var isCropped : Bool = false
     
     @State private var showPicker : Bool = false
-    @State var croppedImage : UIImage?
+    @Binding var croppedImage : UIImage?
     @State var photosItem : PhotosPickerItem?
     
     var body: some View {

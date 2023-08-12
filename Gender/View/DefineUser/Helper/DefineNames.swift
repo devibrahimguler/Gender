@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DefineNames: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,7 +26,7 @@ struct DefineNames: View {
             Text("What is your name?")
                 .font(.system(size: 40, weight: .bold))
             
-            TextField("enter your name".uppercased(), text: $defineUserViewModel.name)
+            TextField("enter your name".uppercased(), text: $homeViewModel.name)
                 .keyboardType(.namePhonePad)
                 .textInputAutocapitalization(.never)
                 .font(.headline.weight(.bold))
@@ -42,18 +42,18 @@ struct DefineNames: View {
             Spacer(minLength: 10)
             
             Button {
-                defineUserViewModel.defineCount += 1
+                homeViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(defineUserViewModel.name == "" ? .gray : .red)
+                    .background(homeViewModel.name == "" ? .gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
-            .disabled(defineUserViewModel.name == "")
+            .disabled(homeViewModel.name == "")
       
         }
         .padding(20)
@@ -63,6 +63,6 @@ struct DefineNames: View {
 struct DefineNames_Previews: PreviewProvider {
     static var previews: some View {
         DefineNames()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

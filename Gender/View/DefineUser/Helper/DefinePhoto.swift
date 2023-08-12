@@ -10,14 +10,14 @@ import PhotosUI
 
 struct DefinePhoto: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
 
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                defineUserViewModel.defineCount -= 1
+                homeViewModel.defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -34,39 +34,41 @@ struct DefinePhoto: View {
             
             HStack {
                 
-                PhotoSelectorButton(selectedImage: $defineUserViewModel.foto1)
+                PhotoSelectorButton(croppedImage: $homeViewModel.foto1)
                
                 Spacer()
                 
-                PhotoSelectorButton(selectedImage: $defineUserViewModel.foto2)
+                PhotoSelectorButton(croppedImage: $homeViewModel.foto2)
                
                 
                 Spacer()
                 
-                PhotoSelectorButton(selectedImage:  $defineUserViewModel.foto3)
+                PhotoSelectorButton(croppedImage: $homeViewModel.foto3)
                
          
             }
             HStack {
                 
-                PhotoSelectorButton(selectedImage:  $defineUserViewModel.foto4)
+                PhotoSelectorButton(croppedImage:  $homeViewModel.foto4)
                
                
                 Spacer()
                 
-                PhotoSelectorButton(selectedImage:  $defineUserViewModel.foto5)
+                PhotoSelectorButton(croppedImage:  $homeViewModel.foto5)
                
                 
                 Spacer()
                 
-                PhotoSelectorButton(selectedImage:  $defineUserViewModel.foto6)
+                PhotoSelectorButton(croppedImage:  $homeViewModel.foto6)
                
          
             }
             Spacer(minLength: 10)
             
             Button {
-                defineUserViewModel.defineCount += 1
+                homeViewModel.defineCount += 1
+                homeViewModel.isDefineUser = false
+                homeViewModel.addUpdateUser()
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -87,6 +89,6 @@ struct DefinePhoto: View {
 struct DefinePhoto_Previews: PreviewProvider {
     static var previews: some View {
         DefinePhoto()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

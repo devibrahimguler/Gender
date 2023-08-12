@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DefineOrientation: View {
 
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             HStack {
                 Button {
-                    defineUserViewModel.defineCount -= 1
+                    homeViewModel.defineCount -= 1
                 } label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 50))
@@ -26,7 +26,7 @@ struct DefineOrientation: View {
                 Spacer(minLength: 10)
                 
                 Button {
-                    defineUserViewModel.defineCount += 1
+                    homeViewModel.defineCount += 1
                 } label: {
                     Text("Skip")
                         .font(.system(size: 30))
@@ -45,20 +45,12 @@ struct DefineOrientation: View {
                 .padding(.bottom, 10)
             
             VStack(spacing: 10) {
-                
-                ListButton(text: "Heterosexual", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual1", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual2", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual3", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual4", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual5", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
-                
-                ListButton(text: "Heterosexual6", list: $defineUserViewModel.selectedOrientation, tag: $defineUserViewModel.selectedTagsOrientation)
+                ScrollView {
+                    ForEach(homeViewModel.orientationTags, id: \.self) { ori in
+                        ListButton(text: ori, list: $homeViewModel.selectedOrientation)
+                    }
+                }
+          
             }
             
           
@@ -68,11 +60,11 @@ struct DefineOrientation: View {
             Divider()
             
             Button {
-                defineUserViewModel.isVisibleOrientation.toggle()
+                homeViewModel.isVisibleOrientation.toggle()
             } label: {
                 
                 HStack {
-                    if defineUserViewModel.isVisibleOrientation {
+                    if homeViewModel.isVisibleOrientation {
                         Image(systemName: "checkmark.square")
                     } else {
                         Image(systemName: "square")
@@ -89,7 +81,7 @@ struct DefineOrientation: View {
             .padding(.vertical)
             
             Button {
-                defineUserViewModel.defineCount += 1
+                homeViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -109,6 +101,6 @@ struct DefineOrientation: View {
 struct DefineOrientation_Previews: PreviewProvider {
     static var previews: some View {
         DefineOrientation()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

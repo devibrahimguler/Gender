@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DefineHobies: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         
@@ -17,7 +17,7 @@ struct DefineHobies: View {
             
             HStack {
                 Button {
-                    defineUserViewModel.defineCount -= 1
+                    homeViewModel.defineCount -= 1
                 } label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 50))
@@ -27,7 +27,7 @@ struct DefineHobies: View {
                 Spacer(minLength: 10)
                 
                 Button {
-                    defineUserViewModel.defineCount += 1
+                    homeViewModel.defineCount += 1
                 } label: {
                     Text("Skip")
                         .font(.system(size: 30))
@@ -53,7 +53,7 @@ struct DefineHobies: View {
                         var height = CGFloat.zero
 
                         ZStack(alignment: .topLeading) {
-                            ForEach(defineUserViewModel.tags, id: \.self) { tag in
+                            ForEach(homeViewModel.hobiesTags, id: \.self) { tag in
                                 self.item(for: tag)
                                     .padding([.horizontal, .vertical], 4)
                                     .alignmentGuide(.leading, computeValue: { d in
@@ -63,7 +63,7 @@ struct DefineHobies: View {
                                             height -= d.height
                                         }
                                         let result = width
-                                        if tag == defineUserViewModel.tags.last! {
+                                        if tag == homeViewModel.hobiesTags.last! {
                                             width = 0 //last item
                                         } else {
                                             width -= d.width
@@ -72,40 +72,38 @@ struct DefineHobies: View {
                                     })
                                     .alignmentGuide(.top, computeValue: {d in
                                         let result = height
-                                        if tag == defineUserViewModel.tags.last! {
+                                        if tag == homeViewModel.hobiesTags.last! {
                                             height = 0 // last item
                                         }
                                         return result
                                     })
                             }
-                        }.background(viewHeightReader($defineUserViewModel.totalHeight))
+                        }.background(viewHeightReader($homeViewModel.totalHeight))
                     }
                 }
-                .frame(height: defineUserViewModel.totalHeight)
+                .frame(height: homeViewModel.totalHeight)
             }
-            
-            
             
             Spacer(minLength: 10)
             
             Divider()
             
             Button {
-                if defineUserViewModel.selectedTags >= 1 {
-                    defineUserViewModel.defineCount += 1
+                if  homeViewModel.selectedHobiesList.count >= 1 {
+                    homeViewModel.defineCount += 1
                 }
             } label: {
-                Text("Go On! \(defineUserViewModel.selectedTags)/5")
+                Text("Go On! \( homeViewModel.selectedHobiesList.count)/5")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(defineUserViewModel.selectedTags == 0 ?.gray : .red)
+                    .background( homeViewModel.selectedHobiesList.count == 0 ?.gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
                 
             }
-            .disabled(defineUserViewModel.selectedTags == 0)
+            .disabled( homeViewModel.selectedHobiesList.count == 0)
             
         }
         .padding(20)
@@ -114,30 +112,28 @@ struct DefineHobies: View {
     private func item(for text: String) -> some View {
         Button {
             
-            if defineUserViewModel.selectedList.contains(text)  {
-                if defineUserViewModel.selectedTags > 0 {
-                    defineUserViewModel.selectedTags -= 1
-                    if let index = defineUserViewModel.selectedList.firstIndex(of: text) {
-                        defineUserViewModel.selectedList.remove(at: index)
+            if homeViewModel.selectedHobiesList.contains(text)  {
+                if homeViewModel.selectedHobiesList.count > 0 {
+                    if let index = homeViewModel.selectedHobiesList.firstIndex(of: text) {
+                        homeViewModel.selectedHobiesList.remove(at: index)
                     }
                 }
             } else {
-                if defineUserViewModel.selectedTags < 5 {
-                    defineUserViewModel.selectedTags += 1
-                    defineUserViewModel.selectedList.append(text)
+                if homeViewModel.selectedHobiesList.count < 5 {
+                    homeViewModel.selectedHobiesList.append(text)
                     
                 }
             }
         } label: {
             Text(text)
                 .font(.body)
-                .foregroundColor(defineUserViewModel.selectedList.contains(text) ? .blue : .gray)
+                .foregroundColor(homeViewModel.selectedHobiesList.contains(text) ? .blue : .gray)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 10)
                 .overlay {
                     RoundedRectangle(cornerRadius: 25)
                         .stroke(lineWidth: 1)
-                        .fill(defineUserViewModel.selectedList.contains(text) ? .blue : .gray)
+                        .fill(homeViewModel.selectedHobiesList.contains(text) ? .blue : .gray)
                 }
         }
 
@@ -158,7 +154,7 @@ struct DefineHobies: View {
 struct DefineHobies_Previews: PreviewProvider {
     static var previews: some View {
         DefineHobies()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
     
 }

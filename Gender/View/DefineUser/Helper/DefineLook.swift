@@ -9,13 +9,13 @@ import SwiftUI
 
 struct DefineLook: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                defineUserViewModel.defineCount -= 1
+                homeViewModel.defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -33,12 +33,11 @@ struct DefineLook: View {
             
             
             HStack {
-                
-                LookSelectButton(header: "💖", text: "USİ")
+                LookSelectButton(selected: $homeViewModel.selectedLook, header: "💖", text: "USİ")
       
-                LookSelectButton(header: "😍", text: "UİKO")
+                LookSelectButton(selected: $homeViewModel.selectedLook, header: "😍", text: "UİKO")
             
-                LookSelectButton(header: "🥂", text: "KİUO")
+                LookSelectButton(selected: $homeViewModel.selectedLook, header: "🥂", text: "KİUO")
                 
             }
             .frame(height: 150)
@@ -46,7 +45,7 @@ struct DefineLook: View {
             Spacer(minLength: 10)
             
             Button {
-                defineUserViewModel.defineCount += 1
+                homeViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -66,6 +65,6 @@ struct DefineLook: View {
 struct DefineLook_Previews: PreviewProvider {
     static var previews: some View {
         DefineLook()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }

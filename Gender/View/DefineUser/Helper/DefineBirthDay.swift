@@ -9,13 +9,13 @@ import SwiftUI
 
 struct DefineBirthDay: View {
     
-    @EnvironmentObject var defineUserViewModel : DefineUserViewModel
+    @EnvironmentObject var homeViewModel : HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                defineUserViewModel.defineCount -= 1
+                homeViewModel.defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -30,17 +30,17 @@ struct DefineBirthDay: View {
                 
                 Spacer()
                 
-                BirtDayAtDay(day1: $defineUserViewModel.defineBirthDayD1, day2: $defineUserViewModel.defineBirthDayD2)
+                BirtDayAtDay(day1: $homeViewModel.defineBirthDayD1, day2: $homeViewModel.defineBirthDayD2)
                 
                 Text("/")
                 
                 
-                BirtDayAtMonth(month1: $defineUserViewModel.defineBirthDayM1, month2: $defineUserViewModel.defineBirthDayM2)
+                BirtDayAtMonth(month1: $homeViewModel.defineBirthDayM1, month2: $homeViewModel.defineBirthDayM2)
                 
                 Text("/")
                
                 
-               BirtDayAtYear(year1: $defineUserViewModel.defineBirthDayY1, year2: $defineUserViewModel.defineBirthDayY2, year3: $defineUserViewModel.defineBirthDayY3, year4: $defineUserViewModel.defineBirthDayY4)
+                BirtDayAtYear(year1: $homeViewModel.defineBirthDayY1, year2: $homeViewModel.defineBirthDayY2, year3: $homeViewModel.defineBirthDayY3, year4: $homeViewModel.defineBirthDayY4)
                 
                 Spacer()
                 
@@ -55,7 +55,7 @@ struct DefineBirthDay: View {
             Spacer(minLength: 10)
             
             Button {
-                defineUserViewModel.defineCount += 1
+                homeViewModel.defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -75,7 +75,7 @@ struct DefineBirthDay: View {
 struct DefineBirthDay_Previews: PreviewProvider {
     static var previews: some View {
         DefineBirthDay()
-            .environmentObject({ () -> DefineUserViewModel in return DefineUserViewModel() }() )
+            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
     }
 }
 
