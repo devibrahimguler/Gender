@@ -9,12 +9,15 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoSelectorButton: View {
+    
     var crop : CGSize = .init(width: 340, height: 500)
     @State var selectedImage : UIImage?
     @State private var isCropped : Bool = false
     
     @State private var showPicker : Bool = false
-    @Binding var croppedImage : UIImage?
+    
+    var i : Int
+    @Binding var croppedImage : [Int : UIImage]
     @State var photosItem : PhotosPickerItem?
     
     var body: some View {
@@ -23,11 +26,12 @@ struct PhotoSelectorButton: View {
                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
                 .overlay {
                     VStack {
-                        if let croppedImage {
-                            Image(uiImage: croppedImage)
+                        if let image = croppedImage[i] {
+                            Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
-                                .cornerRadius(25)
+                                .cornerRadius(15)
+                                .padding(2)
                         } else {
                             RoundedRectangle(cornerRadius: 13)
                                 .fill(.gray)
@@ -82,7 +86,7 @@ struct PhotoSelectorButton: View {
         } content: {
             CropView(crop: crop, image: selectedImage) { croppedImage, status in
                 if let croppedImage {
-                    self.croppedImage = croppedImage
+                    self.croppedImage[i] = croppedImage
                 }
             }
         }

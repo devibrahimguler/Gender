@@ -36,7 +36,7 @@ struct CropView : View {
                  .toolbar {
                      ToolbarItem(placement: .navigationBarTrailing) {
                          Button {
-                             let renderer = ImageRenderer(content: ImageView(true))
+                             let renderer = ImageRenderer(content: ImageView())
                              renderer.proposedSize = .init(crop)
                              if let image = renderer.uiImage {
                                  onCrop(image, true)
@@ -66,8 +66,10 @@ struct CropView : View {
         }
     }
     
+    
+    // func ImageView(_ hideGrids: Bool = false)
     @ViewBuilder
-    func ImageView(_ hideGrids: Bool = false) -> some View {
+    func ImageView() -> some View {
         let cropSize = crop
         GeometryReader {
             let size = $0.size
@@ -112,11 +114,13 @@ struct CropView : View {
         }
         .scaleEffect(scale)
         .offset(offset)
-        .overlay(content: {
-            if !hideGrids {
-                Grids()
-            }
-        })
+        /*
+         .overlay(content: {
+             if !hideGrids {
+                 Grids()
+             }
+         })
+         */
         .coordinateSpace(name: "CROPVIEW")
         .gesture(
         DragGesture()
@@ -151,6 +155,7 @@ struct CropView : View {
         .frame(width: cropSize.width, height: cropSize.height)
     }
     
+   /*
     @ViewBuilder
     func Grids() -> some View {
         ZStack {
@@ -172,6 +177,7 @@ struct CropView : View {
             }
         }
     }
+    */
     
 }
 

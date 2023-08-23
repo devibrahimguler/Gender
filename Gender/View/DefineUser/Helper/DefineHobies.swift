@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct DefineHobies: View {
+
+    var hobiesTags : [String]
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var selected : [String]
+    @Binding var height : CGFloat
+    @Binding var defineCount : Int
     
     var body: some View {
         
@@ -17,7 +21,7 @@ struct DefineHobies: View {
             
             HStack {
                 Button {
-                    homeViewModel.defineCount -= 1
+                    defineCount -= 1
                 } label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 50))
@@ -27,7 +31,7 @@ struct DefineHobies: View {
                 Spacer(minLength: 10)
                 
                 Button {
-                    homeViewModel.defineCount += 1
+                    defineCount += 1
                 } label: {
                     Text("Skip")
                         .font(.system(size: 30))
@@ -53,7 +57,7 @@ struct DefineHobies: View {
                         var height = CGFloat.zero
 
                         ZStack(alignment: .topLeading) {
-                            ForEach(homeViewModel.hobiesTags, id: \.self) { tag in
+                            ForEach(hobiesTags, id: \.self) { tag in
                                 self.item(for: tag)
                                     .padding([.horizontal, .vertical], 4)
                                     .alignmentGuide(.leading, computeValue: { d in
@@ -63,7 +67,7 @@ struct DefineHobies: View {
                                             height -= d.height
                                         }
                                         let result = width
-                                        if tag == homeViewModel.hobiesTags.last! {
+                                        if tag == hobiesTags.last! {
                                             width = 0 //last item
                                         } else {
                                             width -= d.width
@@ -72,16 +76,16 @@ struct DefineHobies: View {
                                     })
                                     .alignmentGuide(.top, computeValue: {d in
                                         let result = height
-                                        if tag == homeViewModel.hobiesTags.last! {
+                                        if tag == hobiesTags.last! {
                                             height = 0 // last item
                                         }
                                         return result
                                     })
                             }
-                        }.background(viewHeightReader($homeViewModel.totalHeight))
+                        }.background(viewHeightReader($height))
                     }
                 }
-                .frame(height: homeViewModel.totalHeight)
+                .frame(height: height)
             }
             
             Spacer(minLength: 10)
@@ -89,21 +93,21 @@ struct DefineHobies: View {
             Divider()
             
             Button {
-                if  homeViewModel.selectedHobiesList.count >= 1 {
-                    homeViewModel.defineCount += 1
+                if  selected.count >= 1 {
+                    defineCount += 1
                 }
             } label: {
-                Text("Go On! \( homeViewModel.selectedHobiesList.count)/5")
+                Text("Go On! \( selected.count)/5")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background( homeViewModel.selectedHobiesList.count == 0 ?.gray : .red)
+                    .background( selected.count == 0 ?.gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
                 
             }
-            .disabled( homeViewModel.selectedHobiesList.count == 0)
+            .disabled( selected.count == 0)
             
         }
         .padding(20)
@@ -112,28 +116,28 @@ struct DefineHobies: View {
     private func item(for text: String) -> some View {
         Button {
             
-            if homeViewModel.selectedHobiesList.contains(text)  {
-                if homeViewModel.selectedHobiesList.count > 0 {
-                    if let index = homeViewModel.selectedHobiesList.firstIndex(of: text) {
-                        homeViewModel.selectedHobiesList.remove(at: index)
+            if selected.contains(text)  {
+                if selected.count > 0 {
+                    if let index = selected.firstIndex(of: text) {
+                        selected.remove(at: index)
                     }
                 }
             } else {
-                if homeViewModel.selectedHobiesList.count < 5 {
-                    homeViewModel.selectedHobiesList.append(text)
+                if selected.count < 5 {
+                    selected.append(text)
                     
                 }
             }
         } label: {
             Text(text)
                 .font(.body)
-                .foregroundColor(homeViewModel.selectedHobiesList.contains(text) ? .blue : .gray)
+                .foregroundColor(selected.contains(text) ? .blue : .gray)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 10)
                 .overlay {
                     RoundedRectangle(cornerRadius: 25)
                         .stroke(lineWidth: 1)
-                        .fill(homeViewModel.selectedHobiesList.contains(text) ? .blue : .gray)
+                        .fill(selected.contains(text) ? .blue : .gray)
                 }
         }
 
@@ -153,8 +157,17 @@ struct DefineHobies: View {
 
 struct DefineHobies_Previews: PreviewProvider {
     static var previews: some View {
-        DefineHobies()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineHobies()
+    }
+    
+    struct TestDefineHobies : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineHobies(hobiesTags: defineUserViewModel.hobiesTags,selected: $defineUserViewModel.hobies, height:$defineUserViewModel.height, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
     
 }

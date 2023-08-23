@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DefineLook: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var selected : String
+    @Binding var defineCount : Int
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -33,11 +34,11 @@ struct DefineLook: View {
             
             
             HStack {
-                LookSelectButton(selected: $homeViewModel.selectedLook, header: "💖", text: "USİ")
+                LookSelectButton(selected: $selected, header: "💖", text: "USİ")
       
-                LookSelectButton(selected: $homeViewModel.selectedLook, header: "😍", text: "UİKO")
+                LookSelectButton(selected: $selected, header: "😍", text: "UİKO")
             
-                LookSelectButton(selected: $homeViewModel.selectedLook, header: "🥂", text: "KİUO")
+                LookSelectButton(selected: $selected, header: "🥂", text: "KİUO")
                 
             }
             .frame(height: 150)
@@ -45,7 +46,7 @@ struct DefineLook: View {
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -64,7 +65,16 @@ struct DefineLook: View {
 
 struct DefineLook_Previews: PreviewProvider {
     static var previews: some View {
-        DefineLook()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineLook()
+    }
+    
+    struct TestDefineLook : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineLook(selected: $defineUserViewModel.wantLook, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
 }

@@ -9,18 +9,18 @@ import SwiftUI
 
 struct DefineUser: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
     
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                ForEach(0...homeViewModel.defineCount, id: \.self) { i in
+                ForEach(0...defineUserViewModel.defineCount, id: \.self) { i in
                     
                     Rectangle()
                         .fill(.red)
                         .frame(width: getRect().width / 10, height: 10)
-                        .offset(x: homeViewModel.defineCount == i ? -200 : 0)
-                        .animation(.linear, value: homeViewModel.defineCount)
+                        .offset(x: defineUserViewModel.defineCount == i ? -200 : 0)
+                        .animation(.linear, value: defineUserViewModel.defineCount)
                     
                
                 }
@@ -30,40 +30,30 @@ struct DefineUser: View {
             
             Divider()
             
-            switch(homeViewModel.defineCount) {
+            switch(defineUserViewModel.defineCount) {
             case 1:
-                DefineNames()
-                    .environmentObject(homeViewModel)
+                DefineNames(name: $defineUserViewModel.name, defineCount: $defineUserViewModel.defineCount)
             case 2:
-                DefineBirthDay()
-                    .environmentObject(homeViewModel)
+                DefineBirthDay(birthList: $defineUserViewModel.defineBirthDay, defineCount: $defineUserViewModel.defineCount)
             case 3:
-                DefineGender()
-                    .environmentObject(homeViewModel)
+                DefineGender(gender: $defineUserViewModel.gender, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleGender)
             case 4:
-                DefineOrientation()
-                    .environmentObject(homeViewModel)
+                DefineOrientation(orientationTags: defineUserViewModel.orientationTags, selected: $defineUserViewModel.orientation, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleOrientation)
             case 5:
-                DefineInterested()
-                    .environmentObject(homeViewModel)
+                DefineInterested(selected: $defineUserViewModel.interest, defineCount: $defineUserViewModel.defineCount)
             case 6:
-                DefineDistance()
-                    .environmentObject(homeViewModel)
+                DefineDistance(position: $defineUserViewModel.position, defineCount: $defineUserViewModel.defineCount)
             case 7:
-                DefineLook()
-                    .environmentObject(homeViewModel)
+                DefineLook(selected: $defineUserViewModel.wantLook, defineCount: $defineUserViewModel.defineCount)
             case 8:
-                DefineSchool()
-                    .environmentObject(homeViewModel)
+                DefineSchool(selected: $defineUserViewModel.school, defineCount: $defineUserViewModel.defineCount)
             case 9:
-                DefineHobies()
-                    .environmentObject(homeViewModel)
+                DefineHobies(hobiesTags: defineUserViewModel.hobiesTags,selected: $defineUserViewModel.hobies, height:$defineUserViewModel.height, defineCount: $defineUserViewModel.defineCount)
             case 10:
-                DefinePhoto()
-                    .environmentObject(homeViewModel)
+                DefinePhoto(added: defineUserViewModel.AddUser,selected: $defineUserViewModel.selectedPhoto, defineCount: $defineUserViewModel.defineCount)
+       
             default:
-                RouterView()
-                    .environmentObject(homeViewModel)
+                GenderProgress()
             }
             
             Spacer()
@@ -73,8 +63,16 @@ struct DefineUser: View {
 
 struct DefineUser_Previews: PreviewProvider {
     static var previews: some View {
-        DefineUser()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineUser()
+    }
+    
+    struct TestDefineUser : View {
+        
+        var body: some View {
+            VStack {
+                DefineUser()
+            }
+        }
     }
 }
 

@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DefineDistance: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var position : CGPoint
+    @Binding var defineCount : Int
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -39,7 +40,7 @@ struct DefineDistance: View {
                     
                     Spacer(minLength: 10)
                     
-                    Text("\(homeViewModel.definePosition.x) km")
+                    Text("\(position.x) km")
                         .font(.callout)
                 }
                 
@@ -47,7 +48,7 @@ struct DefineDistance: View {
                     HStack(spacing: 0) {
                         Rectangle()
                             .fill(.red)
-                            .frame(width: homeViewModel.definePosition.x, height: 5)
+                            .frame(width: position.x, height: 5)
                         
                         Rectangle()
                             .fill(.gray)
@@ -61,12 +62,12 @@ struct DefineDistance: View {
                             Circle()
                                 .fill(.white)
                         }
-                        .position(x: homeViewModel.definePosition.x + 20, y: 25)
+                        .position(x: position.x + 20, y: 25)
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
                                     if value.location.x >= 0 && value.location.x <= 320 {
-                                        homeViewModel.definePosition.x = value.location.x
+                                        position.x = value.location.x
                                     }
                                    
                                     
@@ -85,7 +86,7 @@ struct DefineDistance: View {
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -104,7 +105,16 @@ struct DefineDistance: View {
 
 struct DefineDistance_Previews: PreviewProvider {
     static var previews: some View {
-        DefineDistance()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineDistance()
+    }
+    
+    struct TestDefineDistance : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineDistance(position: $defineUserViewModel.position, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
 }

@@ -16,23 +16,17 @@ struct RouterView: View {
             
             Profile()
                 .environmentObject(homeViewModel)
+                .foregroundColor(.white)
                 .frame(width: getRect().width / 2)
                 .offset(x: homeViewModel.isProfile ? 0: -350)
                 .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
           
-            
-            homeViewModel.bG
-                .frame(width:  homeViewModel.isProfile ? getRect().width : nil,  height:  homeViewModel.isProfile ? getRect().height / 1.2 : nil)
-                .cornerRadius( 50 )
-                .offset(x: homeViewModel.isProfile ? getRect().width / 2 : 0)
-                .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
-                .ignoresSafeArea()
-            
             Home()
                 .environmentObject(homeViewModel)
             
+            
         }
-        .background( homeViewModel.orange)
+        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
         
 
     }
@@ -40,7 +34,17 @@ struct RouterView: View {
 
 struct RouterView_Previews: PreviewProvider {
     static var previews: some View {
-        RouterView()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestRouterView()
+    }
+    
+    struct TestRouterView : View {
+        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        
+        var body: some View {
+            VStack {
+                RouterView()
+                    .environmentObject(homeViewModel)
+            }
+        }
     }
 }

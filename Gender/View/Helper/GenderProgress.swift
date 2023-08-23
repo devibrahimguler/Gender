@@ -9,30 +9,42 @@ import SwiftUI
 
 struct GenderProgress: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
-    
-    private let black : Color = Color("Black")
+    @State var rotation = 30.0
+    var startColor : Color = Color("Start")
+    var endColor : Color = Color("End")
     
     var body: some View {
         
         VStack{
             
             Text("Gender")
-                .foregroundColor(black)
+                .foregroundColor(.white)
                 .font(.system(size: 40,weight: .bold, design: .rounded))
-                .frame( width: getRect().width, alignment: .center)
-                .rotationEffect(Angle(degrees: homeViewModel.rotation))
-                .animation(.easeOut.repeatForever(), value: homeViewModel.rotation)
+                .rotationEffect(Angle(degrees: rotation))
+                .animation(.easeOut.repeatForever(), value: rotation)
             
         }.onAppear {
-            homeViewModel.rotation = homeViewModel.rotation == 30 ? homeViewModel.rotation - 60 : homeViewModel.rotation + 60
+            rotation = rotation == 30 ? rotation - 60 : rotation + 60
         }
+        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
+        
     }
 }
 
 struct GenderProgress_Previews: PreviewProvider {
     static var previews: some View {
-        GenderProgress()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestGenderProgress()
+    }
+    
+    struct TestGenderProgress : View {
+        
+        var body: some View {
+            VStack {
+                GenderProgress()
+                
+            }
+        }
     }
 }

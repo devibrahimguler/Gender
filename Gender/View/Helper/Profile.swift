@@ -13,65 +13,55 @@ struct Profile: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            if let photo = homeViewModel.selectedPhoto.first {
-                if let data = photo {
-                    Image(uiImage: data)
+            if self.homeViewModel.photoProgress {
+                GenderProgress()
+                    .scaledToFill()
+                    .clipShape(Circle())
+                    .frame(width: 120, height: 120)
+                    .padding(.top, 30)
+            } else {
+                if let photo = homeViewModel.selectedPhoto.first {
+                    Image(uiImage: photo.value)
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: 120, height: 120)
                         .padding(.top, 30)
                 }
-            } else {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .scaledToFill()
-                    .clipShape(Circle())
-                    .frame(width: 120, height: 120)
-                    .padding(.top, 30)
             }
-            
-          
-           
             
             VStack(spacing: 2) {
                 Text("Hallo,")
-                    .foregroundColor(homeViewModel.bG)
                 
-                Text(homeViewModel.currentUser.name)
+                Text(homeViewModel.currentUser.name ?? "")
                     .font(.headline.bold())
-                    .foregroundColor(homeViewModel.bG)
             }
             
             Divider()
                 .frame(height: 2)
-                .background(homeViewModel.bG)
+                .background(.white)
                 .padding(.horizontal, 20)
             
             Button {
                 homeViewModel.isSettings = true
             } label: {
                 Text("Settings")
-                    .foregroundColor(homeViewModel.bG)
             }
             .padding(.bottom, 100)
             
             Divider()
                 .frame(height: 2)
-                .background(homeViewModel.bG)
+                .background(.white)
                 .padding(.horizontal, 20)
             
             Button {
                 homeViewModel.logoutUser()
             } label: {
                 Text("Logout")
-                    .foregroundColor(homeViewModel.bG)
             }
 
             Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .background(homeViewModel.orange)
         .fullScreenCover(isPresented: $homeViewModel.isSettings) {
             SettingsView()
         }
@@ -81,7 +71,26 @@ struct Profile: View {
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestProfile()
     }
+    
+    struct TestProfile : View {
+        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        
+        var body: some View {
+            VStack {
+                Profile()
+                    .environmentObject(homeViewModel)
+                   
+            }
+            .foregroundColor(.black)
+            .onAppear {
+                self.homeViewModel.currentUser.name = "İbrahim"
+                self.homeViewModel.downloadImage(p: "c4oWyBlrrgUAZszbkhGnIFWgVh12/c4oWyBlrrgUAZszbkhGnIFWgVh121.jpg", index: 0)
+                
+               
+            }
+        }
+    }
+    
 }

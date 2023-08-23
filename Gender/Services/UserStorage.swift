@@ -9,15 +9,15 @@ import FirebaseStorage
 import SwiftUI
 
 protocol StorageProtocol {
-    func UploadUserPhoto(id: String, photonum: String, data: Data?)
+    func UploadUserPhoto(url: String, data: Data?)
     func DownloadUserPhoto(url: String, complation : @escaping (Data?)-> ()) 
 }
 
 struct UserStorage : StorageProtocol {
-    let storage = Storage.storage()
+    private let storage = Storage.storage()
     
-    func UploadUserPhoto(id: String, photonum: String, data: Data? ) {
-        let ref = storage.reference().child("\(id)/\(id + photonum).jpg")
+    func UploadUserPhoto(url: String, data: Data? ) {
+        let ref = storage.reference().child(url)
         if let data = data {
             ref.putData(data, metadata: nil) { metaData, error in
                 guard error == nil else { return }

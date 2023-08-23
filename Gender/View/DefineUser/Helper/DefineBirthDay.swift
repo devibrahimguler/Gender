@@ -9,53 +9,65 @@ import SwiftUI
 
 struct DefineBirthDay: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var birthList : [String]
+    @Binding var defineCount : Int
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
                     .foregroundColor(.gray)
             }
             .padding(.bottom)
-
+            
             Text("Your birth date?")
                 .font(.system(size: 40, weight: .bold))
             
             HStack(spacing: 10) {
                 
                 Spacer()
+                HStack(spacing: 10) {
+                    BirtDaySelection(text: $birthList[0], placeHolder: "D")
+                    BirtDaySelection(text: $birthList[1], placeHolder: "D")
+                    
+                }
                 
-                BirtDayAtDay(day1: $homeViewModel.defineBirthDayD1, day2: $homeViewModel.defineBirthDayD2)
+                Text("\(birthList[2])")
                 
-                Text("/")
+                HStack(spacing: 10) {
+                    BirtDaySelection(text: $birthList[3], placeHolder: "M", isMounth1: true)
+                    BirtDaySelection(text: $birthList[4], placeHolder: "M")
+                    
+                }
                 
+                Text("\(birthList[5])")
                 
-                BirtDayAtMonth(month1: $homeViewModel.defineBirthDayM1, month2: $homeViewModel.defineBirthDayM2)
-                
-                Text("/")
-               
-                
-                BirtDayAtYear(year1: $homeViewModel.defineBirthDayY1, year2: $homeViewModel.defineBirthDayY2, year3: $homeViewModel.defineBirthDayY3, year4: $homeViewModel.defineBirthDayY4)
+                HStack(spacing: 10) {
+                    
+                    BirtDaySelection(text:  $birthList[6], placeHolder: "Y")
+                    BirtDaySelection(text:  $birthList[7], placeHolder: "Y")
+                    BirtDaySelection(text:  $birthList[8], placeHolder: "Y")
+                    BirtDaySelection(text:  $birthList[9], placeHolder: "Y")
+                }
                 
                 Spacer()
                 
             }
             .font(.title)
-    
+            
             
             Text("Profilinde yaşın gösterilir, doğum tarihin değil.")
                 .font(.callout)
                 .padding(.top)
-
+            
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -64,9 +76,9 @@ struct DefineBirthDay: View {
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
-             
+                
             }
-      
+            
         }
         .padding(20)
     }
@@ -74,8 +86,17 @@ struct DefineBirthDay: View {
 
 struct DefineBirthDay_Previews: PreviewProvider {
     static var previews: some View {
-        DefineBirthDay()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineBirthDay()
+    }
+    
+    struct TestDefineBirthDay : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineBirthDay(birthList: $defineUserViewModel.defineBirthDay, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
 }
 

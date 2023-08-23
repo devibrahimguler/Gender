@@ -19,7 +19,7 @@ struct Login: View {
                 Spacer(minLength: 10)
                 
                 Text("Gender")
-                    .foregroundColor(homeViewModel.black)
+                    .foregroundColor(.white)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
                     .offset(y: homeViewModel.isFocused ? -300 : 0)
@@ -34,7 +34,7 @@ struct Login: View {
                     HStack {
                         
                         Image(systemName: "envelope")
-                            .foregroundColor(homeViewModel.black)
+                            .foregroundColor(.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -56,7 +56,7 @@ struct Login: View {
                     
                     HStack {
                         Image(systemName: "lock.fill")
-                            .foregroundColor(homeViewModel.black)
+                            .foregroundColor(.black)
                             .frame(width: 44, height: 44)
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -75,23 +75,23 @@ struct Login: View {
                 }
                 .frame(height: 136)
                 .frame(maxWidth: 712)
-                .background(homeViewModel.cardBG)
+                .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
                 
                 Button(action: {
                     homeViewModel.loginUser()
                 }) {
                     Text("Log in")
-                        .foregroundColor(homeViewModel.black)
+                        .foregroundColor(.black)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(12)
                 .padding(.horizontal, 20)
-                .background(homeViewModel.cardBG)
+                .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .shadow(color: homeViewModel.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 20)
                 .padding()
            
                 
@@ -102,7 +102,7 @@ struct Login: View {
                     }) {
                         Text("Forgot password ?")
                             .font(.subheadline)
-                            .foregroundColor(homeViewModel.black)
+                            .foregroundColor(.black)
                     }
                     .padding(2)
 
@@ -114,7 +114,7 @@ struct Login: View {
                     }) {
                         Text("Click for Register !")
                             .font(.subheadline)
-                            .foregroundColor(homeViewModel.black)
+                            .foregroundColor(.black)
                     }
                     .padding(2)
                 }
@@ -128,7 +128,7 @@ struct Login: View {
         .offset(x:homeViewModel.isLogin ? 0 : getRect().width * 2, y: homeViewModel.isFocused ? -300 : 0)
         .animation(.easeInOut, value: homeViewModel.isFocused)
         .animation(.easeInOut, value: homeViewModel.isLogin)
-        .background(homeViewModel.bG)
+        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
         .onTapGesture {
             homeViewModel.isFocused = false
             
@@ -139,7 +139,17 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestLogin()
+    }
+    
+    struct TestLogin : View {
+        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        
+        var body: some View {
+            VStack {
+                Login()
+                    .environmentObject(homeViewModel)
+            }
+        }
     }
 }

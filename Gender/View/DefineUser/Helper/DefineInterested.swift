@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DefineInterested: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var selected : String
+    @Binding var defineCount : Int
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -27,7 +28,7 @@ struct DefineInterested: View {
                 .font(.system(size: 40, weight: .bold))
             
             Button {
-                homeViewModel.selectedInterested = "Female"
+                selected = "Female"
             } label: {
                 RoundedRectangle(cornerRadius: 50)
                     .stroke(lineWidth: 2)
@@ -37,11 +38,11 @@ struct DefineInterested: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(homeViewModel.selectedInterested == "Female" ? .red : .gray)
+                    .foregroundColor(selected == "Female" ? .red : .gray)
             }
             
             Button {
-                homeViewModel.selectedInterested = "Male"
+                selected = "Male"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -52,11 +53,11 @@ struct DefineInterested: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(homeViewModel.selectedInterested == "Male" ? .blue : .gray)
+                    .foregroundColor(selected == "Male" ? .blue : .gray)
             }
             
             Button {
-                homeViewModel.selectedInterested = "Everyone"
+                selected = "Everyone"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -67,13 +68,13 @@ struct DefineInterested: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(homeViewModel.selectedInterested == "Everyone" ? .purple : .gray)
+                    .foregroundColor(selected == "Everyone" ? .purple : .gray)
             }
             
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -92,7 +93,16 @@ struct DefineInterested: View {
 
 struct DefineInterested_Previews: PreviewProvider {
     static var previews: some View {
-        DefineInterested()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineInterested()
+    }
+    
+    struct TestDefineInterested : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineInterested(selected: $defineUserViewModel.interest, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
 }

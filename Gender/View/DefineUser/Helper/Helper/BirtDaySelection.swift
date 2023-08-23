@@ -15,7 +15,7 @@ struct BirtDaySelection: View {
     var isMounth1: Bool
     
     init(text: Binding<String>, placeHolder: String, isMounth1: Bool = false) {
-        _text = text
+        self._text = text
         self.placeHolder = placeHolder
         self.isMounth1 = isMounth1
     }
@@ -24,8 +24,9 @@ struct BirtDaySelection: View {
         VStack(alignment: .center) {
             TextField(placeHolder.uppercased(), text: $text)
                 .keyboardType(.decimalPad)
+                .font(.system(.headline))
                 .fixedSize(horizontal: true, vertical: false)
-                .limitText($text, to: 1)
+                .underline(color: .gray)
                 .onReceive(Just(text)) { newValue in
                     var allowedCharacters = ""
                     if isMounth1 {
@@ -33,21 +34,29 @@ struct BirtDaySelection: View {
                     } else {
                         allowedCharacters = "0123456789"
                     }
-                    
                     let filtered = newValue.filter { allowedCharacters.contains($0) }
                     if filtered != newValue {
                         self.text = filtered
+                        
                     }
                 }
-                .underline()
         }
+        .limitText($text, to: 1)
     }
 }
 
 struct BirtDaySelection_Previews: PreviewProvider {
-    @State static var text = ""
     static var previews: some View {
-        BirtDaySelection(text: $text, placeHolder: "D")
+        TestBirtDaySelection()
+    }
+    
+    struct TestBirtDaySelection : View {
+        @State var text = ""
+        var body: some View {
+            VStack {
+                BirtDaySelection(text: $text, placeHolder: "D")
+            }
+        }
     }
 }
 
@@ -56,6 +65,9 @@ extension View {
         self
             .onChange(of: text.wrappedValue) { a in
                 text.wrappedValue = String(text.wrappedValue.prefix(characterLimit))
+                
             }
     }
 }
+
+

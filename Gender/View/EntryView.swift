@@ -23,13 +23,23 @@ struct EntryView: View {
                 .environmentObject(homeViewModel)
 
         }
+        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
     }
 }
 
 struct EntryView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryView()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestEntryView()
+    }
+    struct TestEntryView : View {
+        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        
+        var body: some View {
+            VStack {
+                EntryView()
+                    .environmentObject(homeViewModel)
+            }
+        }
     }
 }
 

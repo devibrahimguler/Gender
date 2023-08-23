@@ -9,7 +9,12 @@ import SwiftUI
 
 struct DefineNames: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var name : String
+    @Binding var defineCount : Int
+    
+    var notEmptyName : Bool {
+        return name == ""
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,7 +31,7 @@ struct DefineNames: View {
             Text("What is your name?")
                 .font(.system(size: 40, weight: .bold))
             
-            TextField("enter your name".uppercased(), text: $homeViewModel.name)
+            TextField("enter your name".uppercased(), text: $name)
                 .keyboardType(.namePhonePad)
                 .textInputAutocapitalization(.never)
                 .font(.headline.weight(.bold))
@@ -42,18 +47,18 @@ struct DefineNames: View {
             Spacer(minLength: 10)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(homeViewModel.name == "" ? .gray : .red)
+                    .background(notEmptyName ? .gray : .red)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
-            .disabled(homeViewModel.name == "")
+            .disabled(notEmptyName)
       
         }
         .padding(20)
@@ -62,7 +67,16 @@ struct DefineNames: View {
 
 struct DefineNames_Previews: PreviewProvider {
     static var previews: some View {
-        DefineNames()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineNames()
+    }
+    
+    struct TestDefineNames : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineNames(name: $defineUserViewModel.name, defineCount: $defineUserViewModel.defineCount)
+            }
+        }
     }
 }

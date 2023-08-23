@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct DefineOrientation: View {
-
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    
+    var orientationTags : [String]
+    
+    @Binding var selected : [String]
+    @Binding var defineCount : Int
+    @Binding var isVisible : Bool
     
     var body: some View {
         VStack(alignment: .leading) {
             
             HStack {
                 Button {
-                    homeViewModel.defineCount -= 1
+                    defineCount -= 1
                 } label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 50))
@@ -26,7 +30,7 @@ struct DefineOrientation: View {
                 Spacer(minLength: 10)
                 
                 Button {
-                    homeViewModel.defineCount += 1
+                    defineCount += 1
                 } label: {
                     Text("Skip")
                         .font(.system(size: 30))
@@ -46,8 +50,8 @@ struct DefineOrientation: View {
             
             VStack(spacing: 10) {
                 ScrollView {
-                    ForEach(homeViewModel.orientationTags, id: \.self) { ori in
-                        ListButton(text: ori, list: $homeViewModel.selectedOrientation)
+                    ForEach(orientationTags, id: \.self) { ori in
+                        ListButton(text: ori, list: $selected)
                     }
                 }
           
@@ -60,11 +64,11 @@ struct DefineOrientation: View {
             Divider()
             
             Button {
-                homeViewModel.isVisibleOrientation.toggle()
+                isVisible.toggle()
             } label: {
                 
                 HStack {
-                    if homeViewModel.isVisibleOrientation {
+                    if isVisible {
                         Image(systemName: "checkmark.square")
                     } else {
                         Image(systemName: "square")
@@ -81,7 +85,7 @@ struct DefineOrientation: View {
             .padding(.vertical)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -100,7 +104,16 @@ struct DefineOrientation: View {
 
 struct DefineOrientation_Previews: PreviewProvider {
     static var previews: some View {
-        DefineOrientation()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineOrientation()
+    }
+    
+    struct TestDefineOrientation : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineOrientation(orientationTags: defineUserViewModel.orientationTags, selected: $defineUserViewModel.orientation, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleOrientation)
+            }
+        }
     }
 }

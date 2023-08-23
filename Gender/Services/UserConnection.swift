@@ -8,56 +8,70 @@
 import Firebase
 
 protocol AuthProtocol {
-    func getCurrentUser() -> User?
+    var getUid : String? { get }
+    
     func logout()
-    func isConnected() -> Bool
     func loginUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ())
     func registerUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ())
 }
 
 struct UserConnection : AuthProtocol {
     
-    let auth : Auth = Auth.auth()
+    private let auth : Auth = Auth.auth()
     
-    func getCurrentUser() -> User? {
-        guard let currentUser = auth.currentUser else { return nil}
-        return currentUser
+    var getUid : String? {
+        guard let currentUser = auth.currentUser else { return nil }
+        return currentUser.uid
     }
     
     func logout() {
         do {
             try auth.signOut()
         } catch {
-            print("Hata !")
+            print("Logout eror : \(error.localizedDescription)")
         }
      
     }
     
-    func isConnected() -> Bool {
-        if let auth = auth.currentUser {
-            print(auth.description)
-            return true
-        }
-        return false
-    }
+    
     
     func loginUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ()) {
         auth.signIn(withEmail: email, password: password) { result, error in
-            if let error = error { print(error.localizedDescription) }
-            if let result = result { completion(.success(result)) }
+            
+            guard error == nil  else {
+                completion(.failure(.haveError))
+                return
+            }
+            
+            guard let result = result else {
+                completion(.failure(.dontHandleData))
+                return
+            }
+            
+            completion(.success(result))
         }
     }
     
     func registerUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ()) {
         auth.createUser(withEmail: email, password: password) { result, error in
-            if let error = error { print(error.localizedDescription) }
-            if let result = result { completion(.success(result)) }
+            
+            guard error == nil else {
+                completion(.failure(.haveError))
+                return
+            }
+            
+            guard let result = result  else {
+                completion(.failure(.dontHandleData))
+                return
+            }
+            
+            completion(.success(result))
         }
     }
     
 }
 
 enum AuthError : Error {
-    case dontCatchData
+    case haveError
     case dontHandleData
 }

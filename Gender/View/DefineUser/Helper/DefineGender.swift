@@ -9,13 +9,16 @@ import SwiftUI
 
 struct DefineGender: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @Binding var gender : String
+    @Binding var defineCount : Int
+    @Binding var isVisible : Bool
+    
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                homeViewModel.defineCount -= 1
+                defineCount -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -27,7 +30,7 @@ struct DefineGender: View {
                 .font(.system(size: 40, weight: .bold))
             
             Button {
-                homeViewModel.selectedGender = "Female"
+                gender = "Female"
             } label: {
                 RoundedRectangle(cornerRadius: 50)
                     .stroke(lineWidth: 2)
@@ -37,11 +40,11 @@ struct DefineGender: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(homeViewModel.selectedGender == "Female" ? .red : .gray)
+                    .foregroundColor(gender == "Female" ? .red : .gray)
             }
             
             Button {
-                homeViewModel.selectedGender = "Male"
+                gender = "Male"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -52,7 +55,7 @@ struct DefineGender: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(homeViewModel.selectedGender == "Male" ? .blue : .gray)
+                    .foregroundColor(gender == "Male" ? .blue : .gray)
      
                 
             }
@@ -62,11 +65,11 @@ struct DefineGender: View {
             Divider()
             
             Button {
-                homeViewModel.isVisibleGender.toggle()
+                isVisible.toggle()
             } label: {
                 
                 HStack {
-                    if homeViewModel.isVisibleGender {
+                    if isVisible {
                         Image(systemName: "checkmark.square")
                     } else {
                         Image(systemName: "square")
@@ -83,7 +86,7 @@ struct DefineGender: View {
             .padding(.vertical)
             
             Button {
-                homeViewModel.defineCount += 1
+                defineCount += 1
             } label: {
                 Text("Go On!")
                     .padding(20)
@@ -102,7 +105,16 @@ struct DefineGender: View {
 
 struct DefineGender_Previews: PreviewProvider {
     static var previews: some View {
-        DefineGender()
-            .environmentObject({ () -> HomeViewModel in return HomeViewModel() }() )
+        TestDefineGender()
+    }
+    
+    struct TestDefineGender : View {
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        
+        var body: some View {
+            VStack {
+                DefineGender(gender: $defineUserViewModel.gender, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleGender)
+            }
+        }
     }
 }

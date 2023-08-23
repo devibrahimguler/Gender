@@ -16,15 +16,16 @@ struct HomeView: View {
                 .environmentObject(homeViewModel)
         } else {
             if homeViewModel.isConnected {
+                if (homeViewModel.defineCount == 11) {
+                    RouterView()
+                        .environmentObject(homeViewModel)
+                } else {
+                    DefineUser()
+                        .environmentObject(homeViewModel)
+                }
+            } else {
                 EntryView()
                     .environmentObject(homeViewModel)
-            } else {
-                RouterView()
-                    .environmentObject(homeViewModel)
-                    .fullScreenCover(isPresented: $homeViewModel.isDefineUser) {
-                        DefineUser()
-                            .environmentObject(homeViewModel)
-                    }
             }
         }
     }
