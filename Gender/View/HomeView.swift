@@ -21,7 +21,6 @@ struct HomeView: View {
                         .environmentObject(homeViewModel)
                 } else {
                     DefineUser()
-                        .environmentObject(homeViewModel)
                 }
             } else {
                 EntryView()

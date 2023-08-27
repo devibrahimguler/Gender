@@ -33,6 +33,7 @@
 		0F8B7A7C2A758FE200D83269 /* LookSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A7B2A758FE200D83269 /* LookSelectButton.swift */; };
 		0F8B7A7F2A759D9A00D83269 /* PhotoSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */; };
 		0FA0BE8B2A85654F006E6998 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA0BE8A2A85654F006E6998 /* UserStorage.swift */; };
+		0FA526922A980E2000F1B688 /* RouterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA526912A980E2000F1B688 /* RouterViewModel.swift */; };
 		0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48602A5174DA00CB87A5 /* Profile.swift */; };
 		0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48622A51752700CB87A5 /* RouterView.swift */; };
 		0FBDE1042A96A69800A2B280 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0FBDE1032A96A69800A2B280 /* FirebaseAuth */; };
@@ -90,6 +91,7 @@
 		0F8B7A7D2A75989200D83269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorButton.swift; sourceTree = "<group>"; };
 		0FA0BE8A2A85654F006E6998 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		0FA526912A980E2000F1B688 /* RouterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewModel.swift; sourceTree = "<group>"; };
 		0FBB48602A5174DA00CB87A5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0FBB48622A51752700CB87A5 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		0FC3B8542A64446500350883 /* DefineBirthDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineBirthDay.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				0F49BF802A4F1521005EF07F /* HomeViewModel.swift */,
 				0F0045E82A94E775000042E2 /* DefineUserViewModel.swift */,
+				0FA526912A980E2000F1B688 /* RouterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				0FEBB2F32A521ABD005B5C45 /* SettingsView.swift in Sources */,
 				0FA0BE8B2A85654F006E6998 /* UserStorage.swift in Sources */,
 				0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */,
+				0FA526922A980E2000F1B688 /* RouterViewModel.swift in Sources */,
 				0F0045E92A94E775000042E2 /* DefineUserViewModel.swift in Sources */,
 				0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */,
 				0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */,

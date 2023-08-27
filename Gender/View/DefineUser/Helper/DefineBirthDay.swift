@@ -11,6 +11,7 @@ struct DefineBirthDay: View {
     
     @Binding var birthList : [String]
     @Binding var defineCount : Int
+    @State var complation : Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -67,20 +68,45 @@ struct DefineBirthDay: View {
             Spacer(minLength: 10)
             
             Button {
-                defineCount += 1
+                if complation {
+                    defineCount += 1
+                }
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(complation ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
                 
             }
+            .disabled(!complation)
+       
             
         }
         .padding(20)
+        .onChange(of: birthList) { _ in
+            complation = ControlBirthDay()
+        }
+    }
+    
+    func ControlBirthDay() -> Bool {
+        for i in birthList {
+            if i == "" {
+                return false
+            }
+            
+            if let mounth1 = Int(birthList[3]) {
+                if let mounth2 = Int(birthList[4]) {
+                    if mounth1 >= 1 && mounth2 >= 3 {
+                         return false
+                    }
+                }
+            }
+        }
+        
+        return true
     }
 }
 

@@ -18,9 +18,6 @@ final class DefineUserViewModel : ObservableObject {
     @Published var currentUser : GenderUser = GenderUser()
     @Published var defineCount : Int = 1
     
-    @Published var openDefineAllert : Bool = false
-    @Published var defineAllertText : String = ""
-    
     @Published var defineBirthDay : [String] = ["","","/","","","/","","","",""]
     @Published var selectedPhoto : [Int: UIImage] = [:]
     @Published var showPicker: Bool = false
@@ -45,46 +42,6 @@ final class DefineUserViewModel : ObservableObject {
     @Published var likes : [String] =  []
     @Published var dislike : [String] =  []
     @Published var superlike : [String] = []
-    
-    private var defineUserControl : Bool {
-        let list : [Int: String] = [
-            0 :name,
-            1 :gender,
-            2 :interest,
-            3 :distance,
-            4 :wantLook,
-            5 :school
-        ]
-        
-        if let defineIndex = defineStringControl(list: list) {
-            self.defineAllertText = ""
-            
-            switch(defineIndex) {
-            case 0:
-                self.defineAllertText = "İsim"
-            case 1:
-                self.defineAllertText = "Cinsiyet"
-            case 2:
-                self.defineAllertText = "İlgilendigi cinsiyet"
-            case 3:
-                self.defineAllertText = "Uzaklık"
-            case 4:
-                self.defineAllertText = "Aradığın Model"
-            case 5:
-                self.defineAllertText = "Okul"
-            default:
-                self.defineAllertText = ""
-            }
-            
-            self.defineAllertText += " alanı boş lütfen doldurunuz !"
-            self.openDefineAllert = true
-            
-            return false
-            
-        }
-        
-        return true
-    }
     
     private var definationUserInfo : GenderUser {
         let date = Date()
@@ -147,18 +104,16 @@ final class DefineUserViewModel : ObservableObject {
     }
     
     func AddUser() {
-        if self.defineUserControl {
-            self.userData.AddUser(genderUser: self.definationUserInfo) { result in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: .init(block: {
-                    switch result {
-                    case .failure(let error):
-                        print(error)
-                    case.success(let succ):
-                        print(succ)
-                        
-                    }
-                }))
-            }
+        self.userData.AddUser(genderUser: self.definationUserInfo) { result in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: .init(block: {
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case.success(let succ):
+                    print(succ)
+                    
+                }
+            }))
         }
         
     }

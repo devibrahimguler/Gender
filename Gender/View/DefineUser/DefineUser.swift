@@ -11,6 +11,9 @@ struct DefineUser: View {
     
     @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
     
+    @Environment(\.dismiss) private var dismiss
+    
+    
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -28,7 +31,6 @@ struct DefineUser: View {
             }
             .frame(width: getRect().width, alignment: .leading)
             
-            Divider()
             
             switch(defineUserViewModel.defineCount) {
             case 1:

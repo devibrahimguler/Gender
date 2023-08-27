@@ -42,6 +42,7 @@ struct Register: View {
                             .padding(.leading)
                         
                         TextField("Your Email".uppercased(), text: $homeViewModel.email)
+                            .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
                             .textInputAutocapitalization(.never)
                             .font(.subheadline)
@@ -64,6 +65,7 @@ struct Register: View {
                             .padding(.leading)
                         
                         SecureField("Password".uppercased(), text: $homeViewModel.password)
+                            .autocorrectionDisabled(true)
                             .keyboardType(.default)
                             .font(.subheadline)
                             .padding(.leading)
