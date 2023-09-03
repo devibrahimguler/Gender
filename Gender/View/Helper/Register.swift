@@ -9,7 +9,14 @@ import SwiftUI
 
 struct Register: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    var startColor : Color
+    var endColor : Color
+    
+    @Binding var email : String
+    @Binding var password : String
+    @Binding var isFocused : Bool
+    @Binding var isLogin : Bool
+    var complation : () -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,8 +29,8 @@ struct Register: View {
                     .foregroundColor(.white)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
-                    .offset(y: homeViewModel.isFocused ? -300 : 0)
-                    .animation(.easeInOut, value: homeViewModel.isFocused)
+                    .offset(y: self.isFocused ? -300 : 0)
+                    .animation(.easeInOut, value: self.isFocused)
                 
             }
             
@@ -41,7 +48,7 @@ struct Register: View {
                             .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
-                        TextField("Your Email".uppercased(), text: $homeViewModel.email)
+                        TextField("Your Email".uppercased(), text: $email)
                             .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
                             .textInputAutocapitalization(.never)
@@ -49,7 +56,7 @@ struct Register: View {
                             .padding(.leading)
                             .frame(height: 44)
                             .onTapGesture {
-                                homeViewModel.isFocused = true
+                                self.isFocused = true
                             }
                     }
                     
@@ -64,14 +71,14 @@ struct Register: View {
                             .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
-                        SecureField("Password".uppercased(), text: $homeViewModel.password)
+                        SecureField("Password".uppercased(), text: $password)
                             .autocorrectionDisabled(true)
                             .keyboardType(.default)
                             .font(.subheadline)
                             .padding(.leading)
                             .frame(height: 44)
                             .onTapGesture {
-                                homeViewModel.isFocused = true
+                                self.isFocused = true
                             }
                     }
                     
@@ -88,7 +95,7 @@ struct Register: View {
                 .padding()
                 
                 Button(action: {
-                    homeViewModel.registerUser()
+                    complation()
                 }) {
                     Text("Register")
                         .foregroundColor(.black)
@@ -102,7 +109,7 @@ struct Register: View {
                 .padding()
                 
                 Button(action: {
-                    homeViewModel.isLogin = true
+                    self.isLogin = true
                 }) {
                     Text("Click for Log in !")
                         .font(.subheadline)
@@ -117,11 +124,11 @@ struct Register: View {
             .padding()
             
         }
-        .offset(y: homeViewModel.isFocused ? -300 : 0)
-        .animation(.easeInOut, value: homeViewModel.isFocused)
-        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
+        .offset(y: self.isFocused ? -300 : 0)
+        .animation(.easeInOut, value: self.isFocused)
+        .background(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
         .onTapGesture {
-            homeViewModel.isFocused = false
+            self.isFocused = false
             
         }
         .background()
@@ -134,12 +141,24 @@ struct Register_Previews: PreviewProvider {
     }
     
     struct TestRegister : View {
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        @ObservedObject var entryViewModel : EntryViewModel
+        
+        var startColor : Color = Color("Start")
+        var endColor : Color = Color("End")
+        
+        
+        init() {
+            @State var progress : Bool = false
+            @State var isConnected : Bool = false
+            self.entryViewModel = EntryViewModel(userConnection: UserConnection(), entryProgress: $progress, isConnected: $isConnected)
+        }
         
         var body: some View {
             VStack {
-                Register()
-                    .environmentObject(homeViewModel)
+                Register(startColor: startColor, endColor: endColor, email: $entryViewModel.email, password: $entryViewModel.password, isFocused: $entryViewModel.isFocused, isLogin: $entryViewModel.isLogin)
+                {
+                    entryViewModel.registerUser()
+                }
             }
         }
     }

@@ -8,22 +8,36 @@
 import SwiftUI
 
 struct EntryView: View {
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    
+    @ObservedObject var entryViewModel : EntryViewModel
+    
+    var startColor : Color
+    var endColor : Color
+    
+    init(userConnection : AuthProtocol, entryProgress: Binding<Bool>, isConnected: Binding<Bool>, startColor: Color, endColor: Color) {
+        self.entryViewModel = EntryViewModel(userConnection: userConnection, entryProgress: entryProgress, isConnected: isConnected)
+        self.startColor = startColor
+        self.endColor = endColor
+    }
     
     var body: some View {
         ZStack {
-            Login()
-                .environmentObject(homeViewModel)
-                .offset(x:homeViewModel.isLogin ? 0 : getRect().width * 2)
-                .animation(.easeInOut, value: homeViewModel.isLogin)
+            Login(startColor: startColor, endColor: endColor, email: $entryViewModel.email, password: $entryViewModel.password, isFocused: $entryViewModel.isFocused, isLogin: $entryViewModel.isLogin)
+            {
+                entryViewModel.loginUser()
+            }
+            .offset(x:entryViewModel.isLogin ? 0 : getRect().width * 2)
             
-            Register()
-                .offset(x:homeViewModel.isLogin ? -getRect().width * 2 : 0)
-                .animation(.easeInOut, value: homeViewModel.isLogin)
-                .environmentObject(homeViewModel)
-
+            Register(startColor: startColor, endColor: endColor, email: $entryViewModel.email, password: $entryViewModel.password, isFocused: $entryViewModel.isFocused, isLogin: $entryViewModel.isLogin)
+            {
+                entryViewModel.registerUser()
+            }
+                .offset(x:entryViewModel.isLogin ? -getRect().width * 2 : 0)
+               
+            
         }
-        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
+        .animation(.easeInOut, value: entryViewModel.isLogin)
+        .background(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
     }
 }
 
@@ -32,12 +46,15 @@ struct EntryView_Previews: PreviewProvider {
         TestEntryView()
     }
     struct TestEntryView : View {
+        
         @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        
+        var startColor : Color = Color("Start")
+        var endColor : Color = Color("End")
         
         var body: some View {
             VStack {
-                EntryView()
-                    .environmentObject(homeViewModel)
+                EntryView(userConnection : homeViewModel.userConnection, entryProgress: $homeViewModel.isProgress, isConnected: $homeViewModel.isConnected, startColor: startColor, endColor: endColor)
             }
         }
     }

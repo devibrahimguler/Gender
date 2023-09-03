@@ -9,11 +9,11 @@ import SwiftUI
 import PhotosUI
 
 struct DefinePhoto: View {
-    
-    var added : () -> ()
 
     @Binding var selected : [Int: UIImage]
     @Binding var defineCount : Int
+    
+    var completion : () -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -53,17 +53,18 @@ struct DefinePhoto: View {
             
             Button {
                 defineCount += 1
-                added()
+                completion()
             } label: {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(selected.count > 1 ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
+            .disabled(selected.count <= 1)
       
         }
         .padding(20)
@@ -77,11 +78,11 @@ struct DefinePhoto_Previews: PreviewProvider {
     }
     
     struct TestDefinePhoto : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {
-                DefinePhoto(added: defineUserViewModel.AddUser,selected: $defineUserViewModel.selectedPhoto, defineCount: $defineUserViewModel.defineCount)
+                DefinePhoto(selected: $defineUserViewModel.selectedPhoto, defineCount: $defineUserViewModel.defineCount,completion: defineUserViewModel.AddUser)
             }
         }
     }

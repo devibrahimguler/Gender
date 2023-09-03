@@ -9,7 +9,14 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    var startColor : Color
+    var endColor : Color
+    
+    @Binding var email : String
+    @Binding var password : String
+    @Binding var isFocused : Bool
+    @Binding var isLogin : Bool
+    var complation : () -> ()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,8 +29,8 @@ struct Login: View {
                     .foregroundColor(.white)
                     .font(.system(size: 40,weight: .bold, design: .rounded))
                     .frame( width: getRect().width, alignment: .center)
-                    .offset(y: homeViewModel.isFocused ? -300 : 0)
-                    .animation(.easeInOut, value: homeViewModel.isFocused)
+                    .offset(y: self.isFocused ? -300 : 0)
+                    .animation(.easeInOut, value: self.isFocused)
                 
             }
             
@@ -41,7 +48,7 @@ struct Login: View {
                             .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
-                        TextField("Your Email".uppercased(), text: $homeViewModel.email)
+                        TextField("Your Email".uppercased(), text: $email)
                             .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
                             .textInputAutocapitalization(.never)
@@ -49,7 +56,7 @@ struct Login: View {
                             .padding(.leading)
                             .frame(height: 44)
                             .onTapGesture {
-                                homeViewModel.isFocused = true
+                                self.isFocused = true
                             }
                     }
                     
@@ -64,14 +71,14 @@ struct Login: View {
                             .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 5)
                             .padding(.leading)
                         
-                        SecureField("Password".uppercased(), text: $homeViewModel.password)
+                        SecureField("Password".uppercased(), text: $password)
                             .autocorrectionDisabled(true)
                             .keyboardType(.default)
                             .font(.subheadline)
                             .padding(.leading)
                             .frame(height: 44)
                             .onTapGesture {
-                                homeViewModel.isFocused = true
+                                self.isFocused = true
                             }
                     }
                 }
@@ -83,7 +90,7 @@ struct Login: View {
                 .padding()
                 
                 Button(action: {
-                    homeViewModel.loginUser()
+                    complation()
                 }) {
                     Text("Log in")
                         .foregroundColor(.black)
@@ -112,7 +119,7 @@ struct Login: View {
                     Spacer()
                     
                     Button(action: {
-                        homeViewModel.isLogin = false
+                        self.isLogin = false
                     }) {
                         Text("Click for Register !")
                             .font(.subheadline)
@@ -127,12 +134,12 @@ struct Login: View {
             .padding()
             
         }
-        .offset(x:homeViewModel.isLogin ? 0 : getRect().width * 2, y: homeViewModel.isFocused ? -300 : 0)
-        .animation(.easeInOut, value: homeViewModel.isFocused)
-        .animation(.easeInOut, value: homeViewModel.isLogin)
-        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
+        .offset(x:self.isLogin ? 0 : getRect().width * 2, y: self.isFocused ? -300 : 0)
+        .animation(.easeInOut, value: self.isFocused)
+        .animation(.easeInOut, value: self.isLogin)
+        .background(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
         .onTapGesture {
-            homeViewModel.isFocused = false
+            self.isFocused = false
             
         }
         .background()
@@ -145,12 +152,24 @@ struct Login_Previews: PreviewProvider {
     }
     
     struct TestLogin : View {
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        @ObservedObject var entryViewModel : EntryViewModel
+       
+        
+        var startColor : Color = Color("Start")
+        var endColor : Color = Color("End")
+        
+        init() {
+            @State var progress : Bool = false
+            @State var isConnected : Bool = false
+            self.entryViewModel = EntryViewModel(userConnection: UserConnection(), entryProgress: $progress, isConnected: $isConnected)
+        }
         
         var body: some View {
             VStack {
-                Login()
-                    .environmentObject(homeViewModel)
+                Login(startColor: startColor, endColor: endColor, email: $entryViewModel.email, password: $entryViewModel.password, isFocused: $entryViewModel.isFocused, isLogin: $entryViewModel.isLogin) {
+                    entryViewModel.loginUser()
+                }
+                
             }
         }
     }

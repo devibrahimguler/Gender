@@ -9,15 +9,15 @@ import SwiftUI
 
 struct DefineBirthDay: View {
     
-    @Binding var birthList : [String]
-    @Binding var defineCount : Int
+    @Binding var list : [String]
+    @Binding var count : Int
     @State var complation : Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
             
             Button {
-                defineCount -= 1
+                count -= 1
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 50))
@@ -32,27 +32,27 @@ struct DefineBirthDay: View {
                 
                 Spacer()
                 HStack(spacing: 10) {
-                    BirtDaySelection(text: $birthList[0], placeHolder: "D")
-                    BirtDaySelection(text: $birthList[1], placeHolder: "D")
+                    BirtDaySelection(text: $list[0], placeHolder: "D")
+                    BirtDaySelection(text: $list[1], placeHolder: "D")
                     
                 }
                 
-                Text("\(birthList[2])")
+                Text("\(list[2])")
                 
                 HStack(spacing: 10) {
-                    BirtDaySelection(text: $birthList[3], placeHolder: "M", isMounth1: true)
-                    BirtDaySelection(text: $birthList[4], placeHolder: "M")
+                    BirtDaySelection(text: $list[3], placeHolder: "M", isMounth1: true)
+                    BirtDaySelection(text: $list[4], placeHolder: "M")
                     
                 }
                 
-                Text("\(birthList[5])")
+                Text("\(list[5])")
                 
                 HStack(spacing: 10) {
                     
-                    BirtDaySelection(text:  $birthList[6], placeHolder: "Y")
-                    BirtDaySelection(text:  $birthList[7], placeHolder: "Y")
-                    BirtDaySelection(text:  $birthList[8], placeHolder: "Y")
-                    BirtDaySelection(text:  $birthList[9], placeHolder: "Y")
+                    BirtDaySelection(text:  $list[6], placeHolder: "Y")
+                    BirtDaySelection(text:  $list[7], placeHolder: "Y")
+                    BirtDaySelection(text:  $list[8], placeHolder: "Y")
+                    BirtDaySelection(text:  $list[9], placeHolder: "Y")
                 }
                 
                 Spacer()
@@ -69,7 +69,7 @@ struct DefineBirthDay: View {
             
             Button {
                 if complation {
-                    defineCount += 1
+                    count += 1
                 }
             } label: {
                 Text("Go On!")
@@ -86,19 +86,19 @@ struct DefineBirthDay: View {
             
         }
         .padding(20)
-        .onChange(of: birthList) { _ in
+        .onChange(of: list) { _ in
             complation = ControlBirthDay()
         }
     }
     
     func ControlBirthDay() -> Bool {
-        for i in birthList {
+        for i in list {
             if i == "" {
                 return false
             }
             
-            if let mounth1 = Int(birthList[3]) {
-                if let mounth2 = Int(birthList[4]) {
+            if let mounth1 = Int(list[3]) {
+                if let mounth2 = Int(list[4]) {
                     if mounth1 >= 1 && mounth2 >= 3 {
                          return false
                     }
@@ -116,11 +116,11 @@ struct DefineBirthDay_Previews: PreviewProvider {
     }
     
     struct TestDefineBirthDay : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {
-                DefineBirthDay(birthList: $defineUserViewModel.defineBirthDay, defineCount: $defineUserViewModel.defineCount)
+                DefineBirthDay(list: $defineUserViewModel.defineBirthDay, count: $defineUserViewModel.defineCount)
             }
         }
     }

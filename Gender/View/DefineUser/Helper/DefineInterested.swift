@@ -79,12 +79,13 @@ struct DefineInterested: View {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(selected != "" ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
+            .disabled(selected == "")
       
         }
         .padding(20)
@@ -97,7 +98,7 @@ struct DefineInterested_Previews: PreviewProvider {
     }
     
     struct TestDefineInterested : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {

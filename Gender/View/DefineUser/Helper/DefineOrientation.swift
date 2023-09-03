@@ -90,12 +90,13 @@ struct DefineOrientation: View {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(selected.count > 0 ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
+            .disabled(selected.count <= 0)
       
         }
         .padding(20)
@@ -108,7 +109,7 @@ struct DefineOrientation_Previews: PreviewProvider {
     }
     
     struct TestDefineOrientation : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {

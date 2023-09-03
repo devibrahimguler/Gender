@@ -11,6 +11,10 @@ struct RouterView: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
+    
+    var startColor : Color
+    var endColor : Color
+    
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
             
@@ -21,12 +25,12 @@ struct RouterView: View {
                 .offset(x: homeViewModel.isProfile ? 0: -350)
                 .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
           
-            Home()
+            Home(startColor: startColor, endColor: endColor)
                 .environmentObject(homeViewModel)
             
             
         }
-        .background(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
+        .background(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
         
 
     }
@@ -40,9 +44,13 @@ struct RouterView_Previews: PreviewProvider {
     struct TestRouterView : View {
         @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
         
+        
+        var startColor : Color = Color("Start")
+        var endColor : Color = Color("End")
+        
         var body: some View {
             VStack {
-                RouterView()
+                RouterView(startColor: startColor, endColor: endColor)
                     .environmentObject(homeViewModel)
             }
         }

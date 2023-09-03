@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DefineGender: View {
     
-    @Binding var gender : String
+    @Binding var selected : String
     @Binding var defineCount : Int
     @Binding var isVisible : Bool
     
@@ -30,7 +30,7 @@ struct DefineGender: View {
                 .font(.system(size: 40, weight: .bold))
             
             Button {
-                gender = "Female"
+                selected = "Female"
             } label: {
                 RoundedRectangle(cornerRadius: 50)
                     .stroke(lineWidth: 2)
@@ -40,11 +40,11 @@ struct DefineGender: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(gender == "Female" ? .red : .gray)
+                    .foregroundColor(selected == "Female" ? .red : .gray)
             }
             
             Button {
-                gender = "Male"
+                selected = "Male"
             } label: {
                 
                 RoundedRectangle(cornerRadius: 50)
@@ -55,7 +55,7 @@ struct DefineGender: View {
                             .bold()
                     }
                     .frame(height: 60)
-                    .foregroundColor(gender == "Male" ? .blue : .gray)
+                    .foregroundColor(selected == "Male" ? .blue : .gray)
      
                 
             }
@@ -91,12 +91,13 @@ struct DefineGender: View {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(selected != "" ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
              
             }
+            .disabled(selected == "")
       
         }
         .padding(20)
@@ -109,11 +110,11 @@ struct DefineGender_Previews: PreviewProvider {
     }
     
     struct TestDefineGender : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {
-                DefineGender(gender: $defineUserViewModel.gender, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleGender)
+                DefineGender(selected: $defineUserViewModel.gender, defineCount: $defineUserViewModel.defineCount, isVisible: $defineUserViewModel.isVisibleGender)
             }
         }
     }

@@ -11,6 +11,9 @@ struct Home: View {
     
     @EnvironmentObject var homeViewModel : HomeViewModel
     
+    var startColor : Color
+    var endColor : Color
+    
     var body: some View {
         VStack {
             
@@ -20,7 +23,7 @@ struct Home: View {
                     homeViewModel.isProfile.toggle()
                 } label: {
                     RoundedRectangle(cornerRadius: 7)
-                        .fill(LinearGradient(colors: [homeViewModel.startColor, homeViewModel.endColor], startPoint: .leading, endPoint: .trailing))
+                        .fill(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
                         .frame(width: 40, height: 40)
                         .overlay {
                             Image(systemName: homeViewModel.isProfile ? "multiply": "line.3.horizontal")
@@ -68,9 +71,12 @@ struct Home_Previews: PreviewProvider {
     struct TestHome : View {
         @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
         
+        var startColor : Color = Color("Start")
+        var endColor : Color = Color("End")
+        
         var body: some View {
             VStack {
-                Home()
+                Home(startColor: startColor, endColor: endColor)
                     .environmentObject(homeViewModel)
             }
         }

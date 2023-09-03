@@ -33,8 +33,6 @@ struct UserConnection : AuthProtocol {
      
     }
     
-    
-    
     func loginUser(email: String, password: String, completion : @escaping (Result<AuthDataResult, AuthError>) -> ()) {
         auth.signIn(withEmail: email, password: password) { result, error in
             
@@ -75,3 +73,5 @@ enum AuthError : Error {
     case haveError
     case dontHandleData
 }
+
+

@@ -83,7 +83,7 @@ struct DefineSchool_Previews: PreviewProvider {
     }
     
     struct TestDefineSchool : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {

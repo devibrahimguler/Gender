@@ -91,12 +91,13 @@ struct DefineDistance: View {
                 Text("Go On!")
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .background(.red)
+                    .background(position.x > 0 ? .red : .gray)
                     .bold()
                     .foregroundColor(.white)
                     .cornerRadius(50)
                 
             }
+            .disabled(position.x <= 0)
             
         }
         .padding(20)
@@ -109,7 +110,7 @@ struct DefineDistance_Previews: PreviewProvider {
     }
     
     struct TestDefineDistance : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {

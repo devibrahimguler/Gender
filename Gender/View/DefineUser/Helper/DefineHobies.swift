@@ -161,7 +161,7 @@ struct DefineHobies_Previews: PreviewProvider {
     }
     
     struct TestDefineHobies : View {
-        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel()
+        @ObservedObject var defineUserViewModel : DefineUserViewModel = DefineUserViewModel(userData: UserData(), userStorage: UserStorage(), defineProgress: true)
         
         var body: some View {
             VStack {

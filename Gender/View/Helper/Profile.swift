@@ -20,14 +20,16 @@ struct Profile: View {
                     .frame(width: 120, height: 120)
                     .padding(.top, 30)
             } else {
-                if let photo = homeViewModel.selectedPhoto.first {
-                    Image(uiImage: photo.value)
-                        .resizable()
-                        .scaledToFill()
-                        .clipShape(Circle())
-                        .frame(width: 120, height: 120)
-                        .padding(.top, 30)
-                }
+                /*
+                 if let photo = homeViewModel.selectedPhoto.first {
+                     Image(uiImage: photo.value)
+                         .resizable()
+                         .scaledToFill()
+                         .clipShape(Circle())
+                         .frame(width: 120, height: 120)
+                         .padding(.top, 30)
+                 }
+                 */
             }
             
             VStack(spacing: 2) {

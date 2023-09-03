@@ -9,11 +9,11 @@ import SwiftUI
 
 final class DefineUserViewModel : ObservableObject {
     
-    private let userData : FirestoreProtocol = UserData()
-    private let userConnection : AuthProtocol = UserConnection()
+    var userData : FirestoreProtocol
+    var userStorage : StorageProtocol
     
-    @Published var orientationTags: [String] = ["Heterosexual", "Heterosexual1", "Heterosexual2", "Heterosexual3", "Heterosexual4", "Heterosexual5", "Heterosexual6", "Heterosexual7", "Heterosexual8", "Heterosexual9", "Heterosexual10", "Heterosexual11", "Heterosexual12"]
-    @Published var hobiesTags: [String] = ["Lorem", "Ipsum", "dolor", "consectetur", "adipiscing", "elit", "Nam", "semper", "sit", "amet", "ut", "eleifend", "Cras"]
+    var orientationTags: [String] = ["Heterosexual", "Heterosexual1", "Heterosexual2", "Heterosexual3", "Heterosexual4", "Heterosexual5", "Heterosexual6", "Heterosexual7", "Heterosexual8", "Heterosexual9", "Heterosexual10", "Heterosexual11", "Heterosexual12"]
+    var hobiesTags: [String] = ["Lorem", "Ipsum", "dolor", "consectetur", "adipiscing", "elit", "Nam", "semper", "sit", "amet", "ut", "eleifend", "Cras"]
     
     @Published var currentUser : GenderUser = GenderUser()
     @Published var defineCount : Int = 1
@@ -23,7 +23,7 @@ final class DefineUserViewModel : ObservableObject {
     @Published var showPicker: Bool = false
     
     @Published var position : CGPoint = CGPoint()
-    @Published var height = CGFloat.zero
+    @Published var height : CGFloat = .zero
     
     @Published var name : String = ""
 
@@ -43,7 +43,21 @@ final class DefineUserViewModel : ObservableObject {
     @Published var dislike : [String] =  []
     @Published var superlike : [String] = []
     
+    @Published var defineProgress: Bool
+    
     private var definationUserInfo : GenderUser {
+        var num = 1
+        for i in self.selectedPhoto {
+            let img = i.value
+                let data = img.jpegData(compressionQuality: 1)
+                let url = "\(self.currentUser.id)/\(self.currentUser.id)\(num).jpg"
+                
+                self.userStorage.UploadUserPhoto(url: url, data: data)
+                self.photos.append(url)
+            
+            num += 1
+        }
+        
         let date = Date()
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -73,9 +87,7 @@ final class DefineUserViewModel : ObservableObject {
         user.isVisibleGender = self.isVisibleGender
         user.isVisibleOrientation = self.isVisibleOrientation
         
-        if self.defineCount >= 11 {
-            user.defineUser = true
-        }
+        user.defineUser = true
     
         user.orientation = self.orientation
         user.hobies = self.hobies
@@ -88,30 +100,23 @@ final class DefineUserViewModel : ObservableObject {
         return user
     }
     
-    init() {
-        if let id = self.userConnection.getUid {
-            self.currentUser.id = id
-        }
-    }
-    
-    private func defineStringControl(list : [Int : String]) -> Int? {
-        for i in 0...(list.count - 1) {
-            if list[i] == "" {
-                return i
-            }
-        }
-        return nil
+    init(userData : FirestoreProtocol, userStorage : StorageProtocol, defineProgress: Bool) {
+        self.userData = userData
+        self.userStorage = userStorage
+        self.defineProgress = defineProgress
     }
     
     func AddUser() {
+        self.defineProgress = true
         self.userData.AddUser(genderUser: self.definationUserInfo) { result in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: .init(block: {
                 switch result {
                 case .failure(let error):
+                    self.defineProgress = false
                     print(error)
                 case.success(let succ):
+                    self.defineProgress = false
                     print(succ)
-                    
                 }
             }))
         }
@@ -119,3 +124,45 @@ final class DefineUserViewModel : ObservableObject {
     }
     
 }
+
+/*
+ protocol DefineUserViewModelProtocol {
+     var userData : FirestoreProtocol {get}
+     var userStorage : StorageProtocol {get}
+     
+     var orientationTags : [String]  {get}
+     var hobiesTags : [String]  {get}
+     
+     var currentUser : GenderUser  {get}
+     var defineCount : Int  {get}
+     
+     var defineBirthDay : [String]  {get}
+     var selectedPhoto : [Int: UIImage]  {get}
+     var showPicker: Bool  {get}
+     
+     var position : CGPoint  {get}
+     var height : CGFloat {get}
+     
+     var name : String {get}
+
+     var gender : String {get}
+     var interest : String {get}
+     var distance : String {get}
+     var wantLook : String {get}
+     var school : String {get}
+     
+     var isVisibleGender : Bool {get}
+     var isVisibleOrientation : Bool {get}
+     
+     var orientation : [String] {get}
+     var photos : [String] {get}
+     var hobies : [String] {get}
+     var likes : [String] {get}
+     var dislike : [String] {get}
+     var superlike : [String] {get}
+     
+     var defineProgress: Bool {get}
+     
+     func AddUser()
+ }
+ */
