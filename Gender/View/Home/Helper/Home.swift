@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Home: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @EnvironmentObject var mainViewModel : MainViewModel
     
     var startColor : Color
     var endColor : Color
@@ -20,13 +20,13 @@ struct Home: View {
             
             HStack {
                 Button {
-                    homeViewModel.isProfile.toggle()
+                    mainViewModel.isProfile.toggle()
                 } label: {
                     RoundedRectangle(cornerRadius: 7)
                         .fill(LinearGradient(colors: [startColor, endColor], startPoint: .leading, endPoint: .trailing))
                         .frame(width: 40, height: 40)
                         .overlay {
-                            Image(systemName: homeViewModel.isProfile ? "multiply": "line.3.horizontal")
+                            Image(systemName: mainViewModel.isProfile ? "multiply": "line.3.horizontal")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 20, height: 20)
@@ -37,12 +37,19 @@ struct Home: View {
                 }
                 
                 Spacer()
+                
+                Text("Gender")
+                    .foregroundColor(endColor)
+                    .font(.title.bold())
+                
+                Spacer()
+           
             }
             
             Spacer()
             
             PhotoSelection()
-                .environmentObject(homeViewModel)
+                .environmentObject(mainViewModel)
             
             Spacer()
             
@@ -50,15 +57,15 @@ struct Home: View {
             
         }
 
-        .padding(30)
-        .background(Color.white.cornerRadius(homeViewModel.isProfile ? 50 : .zero).edgesIgnoringSafeArea(.all))
+        .padding(mainViewModel.isProfile ? 30 : 10)
+        .background(Color.white.cornerRadius(mainViewModel.isProfile ? 50 : .zero).edgesIgnoringSafeArea(.all))
         .onTapGesture {
-            homeViewModel.isProfile = false
+            mainViewModel.isProfile = false
         }
-        .frame(width:  homeViewModel.isProfile ? getRect().width : nil,  height:  homeViewModel.isProfile ? getRect().height / 1.2 : nil)
+        .frame(width:  mainViewModel.isProfile ? getRect().width : nil,  height:  mainViewModel.isProfile ? getRect().height / 1.2 : nil)
 
-        .offset(x: homeViewModel.isProfile ? getRect().width / 2 : 0)
-        .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
+        .offset(x: mainViewModel.isProfile ? getRect().width / 2 : 0)
+        .animation(.spring().delay(0.1), value: mainViewModel.isProfile)
         
     }
 }
@@ -69,7 +76,7 @@ struct Home_Previews: PreviewProvider {
     }
     
     struct TestHome : View {
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        @StateObject var mainViewModel : MainViewModel = MainViewModel()
         
         var startColor : Color = Color("Start")
         var endColor : Color = Color("End")
@@ -77,7 +84,7 @@ struct Home_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Home(startColor: startColor, endColor: endColor)
-                    .environmentObject(homeViewModel)
+                    .environmentObject(mainViewModel)
             }
         }
     }

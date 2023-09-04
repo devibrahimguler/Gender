@@ -72,7 +72,7 @@ struct DefineUser_Previews: PreviewProvider {
     }
     
     struct TestDefineUser : View {
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        @StateObject var homeViewModel : MainViewModel = MainViewModel()
         
         var body: some View {
             VStack {

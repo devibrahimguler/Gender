@@ -15,16 +15,21 @@
 		0F20C2B72A5039F0009026D6 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B62A5039F0009026D6 /* EntryView.swift */; };
 		0F20C2B92A50944F009026D6 /* GenderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2B82A50944F009026D6 /* GenderProgress.swift */; };
 		0F20C2BB2A50D76D009026D6 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20C2BA2A50D76D009026D6 /* Home.swift */; };
+		0F4907EC2AA65CC500BB0BDA /* CustomPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4907EB2AA65CC500BB0BDA /* CustomPhoto.swift */; };
+		0F4907EE2AA6613800BB0BDA /* SlipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4907ED2AA6613800BB0BDA /* SlipText.swift */; };
+		0F4907F02AA6649C00BB0BDA /* PhotoCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4907EF2AA6649C00BB0BDA /* PhotoCounter.swift */; };
+		0F4907F22AA6667400BB0BDA /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4907F12AA6667400BB0BDA /* SelectButton.swift */; };
 		0F49BF692A4F1062005EF07F /* GenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF682A4F1062005EF07F /* GenderApp.swift */; };
 		0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF6A2A4F1062005EF07F /* ContentView.swift */; };
 		0F49BF6D2A4F1063005EF07F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F49BF6C2A4F1063005EF07F /* Assets.xcassets */; };
 		0F49BF702A4F1063005EF07F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F49BF6F2A4F1063005EF07F /* Preview Assets.xcassets */; };
-		0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF772A4F1098005EF07F /* HomeView.swift */; };
+		0F49BF782A4F1098005EF07F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF772A4F1098005EF07F /* MainView.swift */; };
 		0F49BF7E2A4F10FB005EF07F /* GenderUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF7D2A4F10FB005EF07F /* GenderUser.swift */; };
-		0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF802A4F1521005EF07F /* HomeViewModel.swift */; };
+		0F49BF812A4F1521005EF07F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF802A4F1521005EF07F /* MainViewModel.swift */; };
 		0F49BF942A4F179A005EF07F /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */; };
 		0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFA92A4F2402005EF07F /* UserData.swift */; };
 		0F49BFAE2A4F568B005EF07F /* UserConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F49BFAD2A4F568B005EF07F /* UserConnection.swift */; };
+		0F4D8DE52AA48F8D00941EA2 /* ImageDownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D8DE42AA48F8D00941EA2 /* ImageDownloaderClient.swift */; };
 		0F4E6A3A2A8D675F00CC033E /* PhotoSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E6A392A8D675F00CC033E /* PhotoSelection.swift */; };
 		0F69680B2A54BCC800B8D60F /* DefineUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F69680A2A54BCC800B8D60F /* DefineUser.swift */; };
 		0F6968132A54BD4F00B8D60F /* DefinePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */; };
@@ -35,7 +40,7 @@
 		0F8B7A7F2A759D9A00D83269 /* PhotoSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */; };
 		0FA0BE8B2A85654F006E6998 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA0BE8A2A85654F006E6998 /* UserStorage.swift */; };
 		0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48602A5174DA00CB87A5 /* Profile.swift */; };
-		0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48622A51752700CB87A5 /* RouterView.swift */; };
+		0FBB48632A51752700CB87A5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB48622A51752700CB87A5 /* HomeView.swift */; };
 		0FBDE1042A96A69800A2B280 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0FBDE1032A96A69800A2B280 /* FirebaseAuth */; };
 		0FBDE1062A96A69F00A2B280 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0FBDE1052A96A69F00A2B280 /* FirebaseFirestore */; };
 		0FBDE1082A96A6A600A2B280 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0FBDE1072A96A6A600A2B280 /* FirebaseStorage */; };
@@ -70,18 +75,23 @@
 		0F20C2B62A5039F0009026D6 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		0F20C2B82A50944F009026D6 /* GenderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderProgress.swift; sourceTree = "<group>"; };
 		0F20C2BA2A50D76D009026D6 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		0F4907EB2AA65CC500BB0BDA /* CustomPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhoto.swift; sourceTree = "<group>"; };
+		0F4907ED2AA6613800BB0BDA /* SlipText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipText.swift; sourceTree = "<group>"; };
+		0F4907EF2AA6649C00BB0BDA /* PhotoCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCounter.swift; sourceTree = "<group>"; };
+		0F4907F12AA6667400BB0BDA /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		0F49BF652A4F1062005EF07F /* Gender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F49BF682A4F1062005EF07F /* GenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderApp.swift; sourceTree = "<group>"; };
 		0F49BF6A2A4F1062005EF07F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0F49BF6C2A4F1063005EF07F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F49BF6F2A4F1063005EF07F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0F49BF772A4F1098005EF07F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0F49BF772A4F1098005EF07F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0F49BF7D2A4F10FB005EF07F /* GenderUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderUser.swift; sourceTree = "<group>"; };
-		0F49BF802A4F1521005EF07F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0F49BF802A4F1521005EF07F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0F49BF862A4F1741005EF07F /* GenderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		0F49BFA92A4F2402005EF07F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0F49BFAD2A4F568B005EF07F /* UserConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConnection.swift; sourceTree = "<group>"; };
+		0F4D8DE42AA48F8D00941EA2 /* ImageDownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderClient.swift; sourceTree = "<group>"; };
 		0F4E6A392A8D675F00CC033E /* PhotoSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelection.swift; sourceTree = "<group>"; };
 		0F69680A2A54BCC800B8D60F /* DefineUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineUser.swift; sourceTree = "<group>"; };
 		0F6968122A54BD4F00B8D60F /* DefinePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinePhoto.swift; sourceTree = "<group>"; };
@@ -93,7 +103,7 @@
 		0F8B7A7E2A759D9900D83269 /* PhotoSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorButton.swift; sourceTree = "<group>"; };
 		0FA0BE8A2A85654F006E6998 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		0FBB48602A5174DA00CB87A5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		0FBB48622A51752700CB87A5 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
+		0FBB48622A51752700CB87A5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0FC3B8542A64446500350883 /* DefineBirthDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineBirthDay.swift; sourceTree = "<group>"; };
 		0FC3B8562A64546A00350883 /* BirtDaySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirtDaySelection.swift; sourceTree = "<group>"; };
 		0FC3B8582A645BDB00350883 /* DefineGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineGender.swift; sourceTree = "<group>"; };
@@ -130,12 +140,7 @@
 		0F20C2B12A50391C009026D6 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				0F20C2B22A50399C009026D6 /* Login.swift */,
-				0F20C2B42A5039A5009026D6 /* Register.swift */,
 				0F20C2B82A50944F009026D6 /* GenderProgress.swift */,
-				0F20C2BA2A50D76D009026D6 /* Home.swift */,
-				0FBB48602A5174DA00CB87A5 /* Profile.swift */,
-				0F4E6A392A8D675F00CC033E /* PhotoSelection.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -187,12 +192,12 @@
 		0F49BF762A4F108B005EF07F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0F4D8DE12AA487BA00941EA2 /* Settings */,
+				0F4D8DDF2AA4879A00941EA2 /* Home */,
+				0F4D8DDD2AA4877300941EA2 /* Login */,
 				0F69680C2A54BCD000B8D60F /* DefineUser */,
 				0F20C2B12A50391C009026D6 /* Helper */,
-				0F49BF772A4F1098005EF07F /* HomeView.swift */,
-				0F20C2B62A5039F0009026D6 /* EntryView.swift */,
-				0FBB48622A51752700CB87A5 /* RouterView.swift */,
-				0FEBB2F22A521ABD005B5C45 /* SettingsView.swift */,
+				0F49BF772A4F1098005EF07F /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,7 +205,7 @@
 		0F49BF7B2A4F10C6005EF07F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0F49BF802A4F1521005EF07F /* HomeViewModel.swift */,
+				0F49BF802A4F1521005EF07F /* MainViewModel.swift */,
 				0F0045E82A94E775000042E2 /* DefineUserViewModel.swift */,
 				0F8208332AA1D8D400BDB0DD /* EntryViewModel.swift */,
 			);
@@ -221,6 +226,7 @@
 				0F49BFA92A4F2402005EF07F /* UserData.swift */,
 				0F49BFAD2A4F568B005EF07F /* UserConnection.swift */,
 				0FA0BE8A2A85654F006E6998 /* UserStorage.swift */,
+				0F4D8DE42AA48F8D00941EA2 /* ImageDownloaderClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -239,6 +245,55 @@
 				0F49BF932A4F179A005EF07F /* HomeViewModelTests.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F4D8DDD2AA4877300941EA2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0F4D8DDE2AA4878200941EA2 /* Helper */,
+				0F20C2B62A5039F0009026D6 /* EntryView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0F4D8DDE2AA4878200941EA2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0F20C2B42A5039A5009026D6 /* Register.swift */,
+				0F20C2B22A50399C009026D6 /* Login.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		0F4D8DDF2AA4879A00941EA2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0F4D8DE02AA487A200941EA2 /* Helper */,
+				0FBB48622A51752700CB87A5 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0F4D8DE02AA487A200941EA2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0F4E6A392A8D675F00CC033E /* PhotoSelection.swift */,
+				0FBB48602A5174DA00CB87A5 /* Profile.swift */,
+				0F20C2BA2A50D76D009026D6 /* Home.swift */,
+				0F4907EB2AA65CC500BB0BDA /* CustomPhoto.swift */,
+				0F4907ED2AA6613800BB0BDA /* SlipText.swift */,
+				0F4907EF2AA6649C00BB0BDA /* PhotoCounter.swift */,
+				0F4907F12AA6667400BB0BDA /* SelectButton.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		0F4D8DE12AA487BA00941EA2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0FEBB2F22A521ABD005B5C45 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		0F69680C2A54BCD000B8D60F /* DefineUser */ = {
@@ -402,10 +457,11 @@
 				0F8B7A7C2A758FE200D83269 /* LookSelectButton.swift in Sources */,
 				0FEBB2F32A521ABD005B5C45 /* SettingsView.swift in Sources */,
 				0FA0BE8B2A85654F006E6998 /* UserStorage.swift in Sources */,
-				0F49BF812A4F1521005EF07F /* HomeViewModel.swift in Sources */,
+				0F49BF812A4F1521005EF07F /* MainViewModel.swift in Sources */,
 				0F0045E92A94E775000042E2 /* DefineUserViewModel.swift in Sources */,
-				0F49BF782A4F1098005EF07F /* HomeView.swift in Sources */,
+				0F49BF782A4F1098005EF07F /* MainView.swift in Sources */,
 				0F49BF6B2A4F1062005EF07F /* ContentView.swift in Sources */,
+				0F4907F22AA6667400BB0BDA /* SelectButton.swift in Sources */,
 				0FBB48612A5174DA00CB87A5 /* Profile.swift in Sources */,
 				0F8B7A7F2A759D9A00D83269 /* PhotoSelectorButton.swift in Sources */,
 				0F127EE12A59F003000E681B /* DefineNames.swift in Sources */,
@@ -415,12 +471,14 @@
 				0FC3B85B2A645E7300350883 /* DefineOrientation.swift in Sources */,
 				0F20C2B92A50944F009026D6 /* GenderProgress.swift in Sources */,
 				0F6968132A54BD4F00B8D60F /* DefinePhoto.swift in Sources */,
+				0F4907F02AA6649C00BB0BDA /* PhotoCounter.swift in Sources */,
 				0F20C2BB2A50D76D009026D6 /* Home.swift in Sources */,
 				0F4E6A3A2A8D675F00CC033E /* PhotoSelection.swift in Sources */,
 				0FC3B8572A64546A00350883 /* BirtDaySelection.swift in Sources */,
 				0F49BFAA2A4F2402005EF07F /* UserData.swift in Sources */,
+				0F4907EE2AA6613800BB0BDA /* SlipText.swift in Sources */,
 				0F49BF7E2A4F10FB005EF07F /* GenderUser.swift in Sources */,
-				0FBB48632A51752700CB87A5 /* RouterView.swift in Sources */,
+				0FBB48632A51752700CB87A5 /* HomeView.swift in Sources */,
 				0F20C2B32A50399C009026D6 /* Login.swift in Sources */,
 				0F11A01A2A76478000CBE0CB /* CropView.swift in Sources */,
 				0FC3B8592A645BDB00350883 /* DefineGender.swift in Sources */,
@@ -431,7 +489,9 @@
 				0F6968172A54BDC200B8D60F /* DefineHobies.swift in Sources */,
 				0F8208342AA1D8D400BDB0DD /* EntryViewModel.swift in Sources */,
 				0F20C2B72A5039F0009026D6 /* EntryView.swift in Sources */,
+				0F4D8DE52AA48F8D00941EA2 /* ImageDownloaderClient.swift in Sources */,
 				0FC3B8612A64736100350883 /* DefineLook.swift in Sources */,
+				0F4907EC2AA65CC500BB0BDA /* CustomPhoto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

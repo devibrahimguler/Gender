@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-final class HomeViewModel : ObservableObject {
+final class MainViewModel : ObservableObject {
     
+    let imageDownloaderClient : ImageDownloaderClient = ImageDownloaderClient()
     let userData : FirestoreProtocol = UserData()
     let userConnection : AuthProtocol = UserConnection()
     let userStorage : StorageProtocol = UserStorage()
@@ -30,11 +31,12 @@ final class HomeViewModel : ObservableObject {
     @Published var isProfile : Bool = false
     @Published var isSettings : Bool = false
     @Published var isStartSearched : Bool = false
+    
     @Published var photoProgress : Bool = false
     @Published var defineUser : Bool = false
     
-    @Published var randomPhoto : [Int: UIImage] = [:]
-    @Published var userPhoto : [Int: UIImage] = [:]
+    @Published var randomPhoto : [Int: Image] = [:]
+    @Published var userPhoto : [Int: Image] = [:]
     
     init() {
         
@@ -60,51 +62,107 @@ final class HomeViewModel : ObservableObject {
         
     }
     
-    func userSelection(selection: LoveChoice) {
+    func userSelection(sense: SenseButtonType) {
         
         if let randomUser = self.randomUser {
             self.submitEffect = 1000
-            self.updateUser(randomUserId: randomUser.id, loveChoice: selection)
+            self.updateUser(randomUserId: randomUser.id, sense: sense)
             self.getUser()
             
         }
         
     }
     
-    func changedGestureValue(value : DragGesture.Value, proxy: GeometryProxy) {
-        self.rotationEffect = -( self.photoGestur.x / 20)
+    private func updateUserInfo(id: String, sense: SenseButtonType) -> GenderUser {
         
-        self.photoGestur.x = value.location.x - proxy.size.width / 2
-        self.photoGestur.y = CGFloat(self.rotationEffect) + (proxy.size.height / 2)
-    }
-    
-    func endGestureValue() {
-        if self.photoGestur.x <= -75 {
-            self.userSelection(selection: .DisLike)
-        } else if self.photoGestur.x >= 75 {
-            self.userSelection(selection: .Like)
+        var user : GenderUser = GenderUser()
+
+        user.id = self.currentUser.id
+        
+        if let name = self.currentUser.name {
+            user.name = name
         }
-        self.rotationEffect = 0
-        self.photoGestur = .zero
-        
-    }
-    
-    func getUserPhotos(point: CGPoint) {
-        if point.x > 191 && point.y < 344 {
-            if (self.randomPhoto.count - 1) > self.photoId {
-                self.photoId += 1
-            }
-        } else if point.x < 191 && point.y < 344 {
-            if self.photoId >= 0 {
-                self.photoId -= 1
-            }
+
+        if let age = self.currentUser.age {
+            user.age = age
         }
         
+        if let birthDay = self.currentUser.birthDay {
+            user.birthDay = birthDay
+        }
+
+        
+        if let gender = self.currentUser.gender {
+            user.gender = gender
+        }
+        
+        if let interest = self.currentUser.interest {
+            user.interest = interest
+        }
+        
+        if let distance = self.currentUser.distance {
+            user.distance = distance
+        }
+        
+        if let wantLook = self.currentUser.wantLook {
+            user.wantLook = wantLook
+        }
+
+        if let school = self.currentUser.school {
+            user.school = school
+        }
+        
+        if let isVisibleGender = self.currentUser.isVisibleGender {
+            user.isVisibleGender = isVisibleGender
+        }
+        
+        if let isVisibleOrientation = self.currentUser.isVisibleOrientation {
+            user.isVisibleOrientation = isVisibleOrientation
+        }
+
+        user.defineUser = true
+    
+        if let orientation = self.currentUser.orientation {
+            user.orientation = orientation
+        }
+        
+        if let hobies = self.currentUser.hobies {
+            user.hobies = hobies
+        }
+        
+        if let photos = self.currentUser.photos  {
+            user.photos = photos
+        }
+
+        if let likes = self.currentUser.likes  {
+            user.likes = likes
+        }
+        if let dislike = self.currentUser.dislike  {
+            user.dislike = dislike
+        }
+        if let superlike = self.currentUser.superlike  {
+            user.superlike = superlike
+        }
+        
+        switch(sense) {
+        case .Like:
+            user.likes?.append(id)
+        case .DisLike:
+            user.dislike?.append(id)
+        case .SuperLike:
+            user.superlike?.append(id)
+        }
+
+        
+        return user
     }
     
-    func updateUser(randomUserId : String?, loveChoice: LoveChoice?) {
+   
+    func updateUser(randomUserId : String?, sense: SenseButtonType?) {
+        guard let id = randomUserId else { return }
+        guard let sense = sense else { return }
         
-        self.userData.AddUser(genderUser: self.currentUser ) { result in
+        self.userData.AddUser(genderUser: self.updateUserInfo(id: id,sense: sense) ) { result in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: .init(block: {
                 switch result {
                 case .failure(let error):
@@ -130,12 +188,16 @@ final class HomeViewModel : ObservableObject {
             self.photoId = 0
             var id = 0
             self.randomPhoto = [:]
+            
             if let photos = user.photos {
                 for photo in photos {
                     if let p = photo {
-                        self.userStorage.DownloadUserPhoto(url: p) { data in
-                            if let data = data {
-                                let image = UIImage(data: data)
+                        imageDownloaderClient.downloadingImage(url: p, userStorage: userStorage) { result in
+                            switch(result) {
+                            case .failure(let fail):
+                                print(fail)
+                            case .success(let image):
+                                print(image)
                                 self.randomPhoto[id] = image
                                 id += 1
                             }
@@ -169,11 +231,19 @@ final class HomeViewModel : ObservableObject {
                         if (self.currentUser.photos != []) {
                             if let photos = self.currentUser.photos {
                                 self.userPhoto = [:]
-                                var k = 0
+                                var id = 0
                                 for photo in photos {
-                                    k += 1
                                     if let p = photo {
-                                        self.downloadImage(p: p, index: k)
+                                        self.imageDownloaderClient.downloadingImage(url: p, userStorage: self.userStorage) { result in
+                                            switch(result) {
+                                            case .failure(let fail):
+                                                print(fail)
+                                            case .success(let image):
+                                                print(image)
+                                                self.userPhoto[id] = image
+                                                id += 1
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -185,23 +255,12 @@ final class HomeViewModel : ObservableObject {
             }
         }
     }
-    
-    func downloadImage(p: String, index: Int) {
-        self.photoProgress = true
-        self.userStorage.DownloadUserPhoto(url: p) { data in
-            if let data = data {
-                let image = UIImage(data: data)
-                self.userPhoto[index] = image
-                self.photoProgress = false
-            }
-        }
-    }
 }
 
-enum LoveChoice {
-    case Like
-    case DisLike
-    case SuperLike
+enum SenseButtonType : String, CaseIterable {
+    case Like = "suit.heart.fill"
+    case DisLike = "xmark"
+    case SuperLike = "star.fill"
 }
 
 /*

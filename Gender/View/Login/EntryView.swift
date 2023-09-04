@@ -47,14 +47,14 @@ struct EntryView_Previews: PreviewProvider {
     }
     struct TestEntryView : View {
         
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+        @StateObject var mainViewModel : MainViewModel = MainViewModel()
         
         var startColor : Color = Color("Start")
         var endColor : Color = Color("End")
         
         var body: some View {
             VStack {
-                EntryView(userConnection : homeViewModel.userConnection, entryProgress: $homeViewModel.isProgress, isConnected: $homeViewModel.isConnected, startColor: startColor, endColor: endColor)
+                EntryView(userConnection : mainViewModel.userConnection, entryProgress: $mainViewModel.isProgress, isConnected: $mainViewModel.isConnected, startColor: startColor, endColor: endColor)
             }
         }
     }

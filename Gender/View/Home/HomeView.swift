@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct RouterView: View {
+struct HomeView: View {
     
-    @EnvironmentObject var homeViewModel : HomeViewModel
+    @EnvironmentObject var mainViewModel : MainViewModel
     
     
     var startColor : Color
@@ -19,14 +19,14 @@ struct RouterView: View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
             
             Profile()
-                .environmentObject(homeViewModel)
+                .environmentObject(mainViewModel)
                 .foregroundColor(.white)
                 .frame(width: getRect().width / 2)
-                .offset(x: homeViewModel.isProfile ? 0: -350)
-                .animation(.spring().delay(0.1), value: homeViewModel.isProfile)
+                .offset(x: mainViewModel.isProfile ? 0: -350)
+                .animation(.spring().delay(0.1), value: mainViewModel.isProfile)
           
             Home(startColor: startColor, endColor: endColor)
-                .environmentObject(homeViewModel)
+                .environmentObject(mainViewModel)
             
             
         }
@@ -36,13 +36,13 @@ struct RouterView: View {
     }
 }
 
-struct RouterView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        TestRouterView()
+        TestHomeView()
     }
     
-    struct TestRouterView : View {
-        @StateObject var homeViewModel : HomeViewModel = HomeViewModel()
+    struct TestHomeView : View {
+        @StateObject var mainViewModel : MainViewModel = MainViewModel()
         
         
         var startColor : Color = Color("Start")
@@ -50,8 +50,8 @@ struct RouterView_Previews: PreviewProvider {
         
         var body: some View {
             VStack {
-                RouterView(startColor: startColor, endColor: endColor)
-                    .environmentObject(homeViewModel)
+                HomeView(startColor: startColor, endColor: endColor)
+                    .environmentObject(mainViewModel)
             }
         }
     }
